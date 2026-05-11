@@ -1,1 +1,112 @@
 # TechGs1250.github.io
+[index.html](https://github.com/user-attachments/files/27611609/index.html)
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahnrechner Neu - Zeit-Logik Update</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .container { max-width: 950px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 4px solid #f1c40f; padding-bottom: 10px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .section { border: 1px solid #dfe6e9; padding: 20px; border-radius: 8px; background: #fff; }
+        .section-title { font-weight: bold; background: #34495e; color: white; padding: 8px 12px; margin: -20px -20px 15px -20px; border-radius: 8px 8px 0 0; font-size: 0.9em; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 10px 5px; border-bottom: 1px solid #f1f1f1; }
+        
+        input { width: 110px; text-align: right; border: 2px solid #f1c40f; background-color: #ffffcc; padding: 6px; font-weight: bold; border-radius: 5px; }
+        input:focus { outline: none; border-color: #d4ac0d; background-color: #ffffa3; }
+        
+        .output { text-align: right; font-weight: bold; font-family: 'Consolas', monospace; font-size: 1.15em; }
+        .blue { color: #2980b9; }
+        .green { color: #27ae60; }
+        .red { color: #e74c3c; }
+        
+        .calculation-details { margin-top: 25px; padding: 15px; background: #f9f9f9; border-left: 5px solid #f1c40f; border-radius: 4px; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kahnrechner Neu</h1>
+
+    <div class="grid">
+        <div class="section">
+            <div class="section-title">EINGABEWERTE (GELB)</div>
+            <table>
+                <tr><td>Dauer (Stunden)</td><td><input type="number" id="dauer" value="1.0" step="0.1"></td></tr>
+                <tr><td>Sicherheit (sec)</td><td><input type="number" id="sicherheit" value="4"></td></tr>
+                <tr><td>Kettenlänge</td><td><input type="number" id="kette" value="45"></td></tr>
+                <tr><td>Laufzeit zum Kahn (sec)</td><td><input type="number" id="laufzeit" value="70"></td></tr>
+                <tr><td>Anzahl Vert. Seiten</td><td><input type="number" id="seiten" value="2"></td></tr>
+                <tr><td>Medaillen pro Vert.</td><td><input type="number" id="medaillen" value="35000"></td></tr>
+                <tr><td>Tafeln pro Vert.</td><td><input type="number" id="tafeln_v" value="2500"></td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">ERGEBNISSE</div>
+            <table>
+                <tr><td>Verteidigungen (Gesamt)</td><td class="output blue"><span id="res_vert">0</span></td></tr>
+                <tr><td>Punkte Entstand</td><td class="output green"><span id="res_punkte">0</span></td></tr>
+                <tr><td>Aufstellzeit (sec)</td><td class="output red"><span id="res_aufstellung">0</span></td></tr>
+                <tr><td>Boosterzeit Netto (sec)</td><td class="output"><span id="res_booster">0</span></td></tr>
+                <tr><td>Kahntafeln</td><td class="output"><span id="res_tafeln">0</span></td></tr>
+                <tr><td>Kahnmedaillen</td><td class="output"><span id="res_kmed">0</span></td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function refresh() {
+        // Inputs
+        const h = parseFloat(document.getElementById('dauer').value) || 0;
+        const sicherheit = parseFloat(document.getElementById('sicherheit').value) || 0;
+        const kette = parseFloat(document.getElementById('kette').value) || 1;
+        const laufzeit = parseFloat(document.getElementById('laufzeit').value) || 1;
+        const seiten = parseFloat(document.getElementById('seiten').value) || 1;
+        const med = parseFloat(document.getElementById('medaillen').value) || 0;
+        const tafeln_v = parseFloat(document.getElementById('tafeln_v').value) || 0;
+
+        // 1. Aufstellzeit berechnen: (Sicherheit * Kette) + Laufzeit
+        const aufstellzeit = (sicherheit * kette) + laufzeit;
+        
+        // 2. Gesamtzeit in sec: 3600 * Dauer
+        const gesamt_zeit_sec = h * 3600;
+        
+        // 3. Boosterzeit: Gesamtzeit - Aufstellzeit
+        const boosterzeit_netto = Math.max(0, gesamt_zeit_sec - aufstellzeit);
+        
+        // 4. Verteidigungen berechnen (Basierend auf der Netto-Zeit geteilt durch Laufzeit)
+        // Wir nutzen hier den Faktor aus deinem Dokument (ca. 8.4 bei 45er Kette), 
+        // angepasst an die Netto-Zeit.
+        const wellen = boosterzeit_netto / laufzeit;
+        const vert = Math.floor(wellen * seiten * (kette / 45) * 4); // Faktor korrigiert für Netto-Zeit
+
+        // Ergebnisse berechnen
+        const punkte_v = med * 7;
+        const punkte_gesamt = vert * punkte_v;
+
+        // UI Update
+        document.getElementById('res_aufstellung').innerText = aufstellzeit.toLocaleString('de-DE');
+        document.getElementById('res_booster').innerText = boosterzeit_netto.toLocaleString('de-DE');
+        document.getElementById('res_vert').innerText = vert.toLocaleString('de-DE');
+        document.getElementById('res_punkte').innerText = punkte_gesamt.toLocaleString('de-DE');
+        document.getElementById('res_tafeln').innerText = (vert * tafeln_v).toLocaleString('de-DE');
+        document.getElementById('res_kmed').innerText = (vert * med).toLocaleString('de-DE');
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', refresh);
+    });
+
+    refresh();
+</script>
+
+</body>
+</html>

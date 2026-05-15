@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahnrechner V1</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .container { max-width: 950px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 4px solid #f1c40f; padding-bottom: 10px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .section { border: 1px solid #dfe6e9; padding: 20px; border-radius: 8px; background: #fff; }
+        .section-title { font-weight: bold; background: #34495e; color: white; padding: 8px 12px; margin: -20px -20px 15px -20px; border-radius: 8px 8px 0 0; font-size: 0.9em; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 10px 5px; border-bottom: 1px solid #f1f1f1; }
+        
+        input { width: 110px; text-align: right; border: 2px solid #f1c40f; background-color: #ffffcc; padding: 6px; font-weight: bold; border-radius: 5px; }
+        input:focus { outline: none; border-color: #d4ac0d; background-color: #ffffa3; }
+        
+        .output { text-align: right; font-weight: bold; font-family: 'Consolas', monospace; font-size: 1.15em; }
+        .blue { color: #2980b9; }
+        .green { color: #27ae60; }
+        .red { color: #e74c3c; }
+        .orange { color: #e67e22; }
+        
+        .calculation-details { margin-top: 25px; padding: 15px; background: #f9f9f9; border-left: 5px solid #f1c40f; border-radius: 4px; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kahnrechner</h1>
+
+    <div class="grid">
+        <div class="section">
+            <div class="section-title">EINGABEWERTE</div>
+            <table>
+                <tr><td>Dauer (Stunden)</td><td><input type="number" id="dauer" value="1.0" step="0.1"></td></tr>
+                <tr><td>Sicherheit (sec)</td><td><input type="number" id="sicherheit" value="4"></td></tr>
+                <tr><td>Kettenlänge</td><td><input type="number" id="kette" value="45"></td></tr>
+                <tr><td>Laufzeit zum Kahn (sec)</td><td><input type="number" id="laufzeit" value="70"></td></tr>
+                <tr><td>Anzahl Vert. Seiten</td><td><input type="number" id="seiten" value="2"></td></tr>
+                <tr><td>Medaillen pro Vert.</td><td><input type="number" id="medaillen" value="35000"></td></tr>
+                <tr><td>Tafeln pro Vert.</td><td><input type="number" id="tafeln_v" value="2500"></td></tr>
+                <tr><td>Truppenverlust / Vert.</td><td><input type="number" id="verlust_v" value="150"></td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Punkte</div>
+            <table>
+                <tr><td>Verteidigungen</td><td class="output"><span id="res_vert">0</span></td></tr>
+                <tr><td>Punkte Endstand</td><td class="output green"><span id="res_punkte">0</span></td></tr>
+                <tr><td>Kahntafeln</td><td class="output orange"><span id="res_tafeln">0</span></td></tr>
+                <tr><td>Kahnmedaillen</td><td class="output yellow"><span id="res_kmed">0</span></td></tr>
+            </table>
+            
+            <div class="section-title" style="margin-top: 20px;">Boosterzeit mit Truppenaufstellung</div>
+            <table>
+                <tr><td>Boosterzeit Netto (min)</td><td class="output"><span id="res_booster_min">0</span></td></tr>
+            </table>
+
+            <div class="section-title" style="margin-top: 20px;">Truppen und Werkzeugverbrauch</div>
+            <table>
+                <tr><td>Truppenverluste (Gesamt)</td><td class="output"><span id="res_verlust_ges">0</span></td></tr>
+                <tr><td>Mauerwerkzeug</td><td class="output"><span id="res_mauer">0</span></td></tr>
+                <tr><td>Grabenwerkzeug</td><td class="output"><span id="res_graben">0</span></td></tr>
+                <tr><td>Torwerkzeug</td><td class="output"><span id="res_tor">0</span></td></tr>
+            <table>
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function refresh() {
+        // Inputs
+        const h = parseFloat(document.getElementById('dauer').value) || 0;
+        const sicherheit = parseFloat(document.getElementById('sicherheit').value) || 0;
+        const kette = parseFloat(document.getElementById('kette').value) || 1;
+        const laufzeit = parseFloat(document.getElementById('laufzeit').value) || 1;
+        const seiten = parseFloat(document.getElementById('seiten').value) || 1;
+        const med = parseFloat(document.getElementById('medaillen').value) || 0;
+        const tafeln_v = parseFloat(document.getElementById('tafeln_v').value) || 0;
+        const verlust_v = parseFloat(document.getElementById('verlust_v').value) || 0;
+
+        // 1. Zeitberechnung
+        const aufstellzeit = (sicherheit * kette) + laufzeit;
+        const gesamt_zeit_sec = h * 3600;
+        const boosterzeit_netto_sec = Math.max(0, gesamt_zeit_sec - aufstellzeit);
+        
+        // Umrechnung in Minuten für die Ansicht
+        const boosterzeit_netto_min = boosterzeit_netto_sec / 60;
+        
+        // 2. Verteidigungen
+        const wellen = boosterzeit_netto_sec / laufzeit;
+        const vert = Math.floor(wellen * seiten * (kette / 45) * 3.95);
+
+        // 3. Ergebnisse
+        const punkte_v = med * 7;
+        const punkte_gesamt = vert * punkte_v;
+        const verlust_gesamt = vert * verlust_v;
+
+        // Werkzeuge
+        const mauer_ges = seiten * 48.8 * vert;
+        const graben_ges = seiten * 11.2 * vert;
+        const tor_ges = 22.6 * vert;
+
+        // UI Update
+        document.getElementById('res_booster_min').innerText = boosterzeit_netto_min.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res_vert').innerText = vert.toLocaleString('de-DE');
+        document.getElementById('res_punkte').innerText = punkte_gesamt.toLocaleString('de-DE');
+        document.getElementById('res_tafeln').innerText = (vert * tafeln_v).toLocaleString('de-DE');
+        document.getElementById('res_kmed').innerText = (vert * med).toLocaleString('de-DE');
+        
+        document.getElementById('res_verlust_ges').innerText = verlust_gesamt.toLocaleString('de-DE');
+        document.getElementById('res_mauer').innerText = Math.round(mauer_ges).toLocaleString('de-DE');
+        document.getElementById('res_graben').innerText = Math.round(graben_ges).toLocaleString('de-DE');
+        document.getElementById('res_tor').innerText = Math.round(tor_ges).toLocaleString('de-DE');
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', refresh);
+    });
+
+    refresh();
+</script>
+
+</body>
+</html>

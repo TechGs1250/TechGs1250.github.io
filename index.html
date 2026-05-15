@@ -154,8 +154,12 @@
                         <td class="output blue"><span id="res_vert">0</span></td>
                     </tr>
                     <tr>
+                        <td>Gesamt Kahnmedaillen</td>
+                        <td class="output orange"><span id="res_medaillen_ges">0</span></td>
+                    </tr>
+                    <tr>
                         <td>Gesamt Kahntafeln</td>
-                        <td class="output orange"><span id="res_tafeln_ges">0</span></td>
+                        <td class="output yellow"><span id="res_tafeln_ges">0</span></td>
                     </tr>
                 </table>
             </div>
@@ -169,15 +173,15 @@
                     </tr>
                     <tr>
                         <td>Mauer-Werkzeuge</td>
-                        <td class="output orange"><span id="res_mauer">0</span></td>
+                        <td class="output black"><span id="res_mauer">0</span></td>
                     </tr>
                     <tr>
                         <td>Graben-Werkzeuge</td>
-                        <td class="output orange"><span id="res_graben">0</span></td>
+                        <td class="output black"><span id="res_graben">0</span></td>
                     </tr>
                     <tr>
                         <td>Tor-Werkzeuge</td>
-                        <td class="output orange"><span id="res_tor">0</span></td>
+                        <td class="output black"><span id="res_tor">0</span></td>
                     </tr>
                 </table>
             </div>
@@ -208,13 +212,16 @@
             verteidigungen = Math.round(punkte / (medaillen * 7)); 
         }
 
-        // 3. Kahntafeln Gesamt berechnen
+        // 3. Gesamt Kahnmedaillen berechnen
+        let medaillenGesamt = medaillen * verteidigungen;
+
+        // 4. Kahntafeln Gesamt berechnen
         let tafelnGesamt = verteidigungen * tafelnProVert;
 
-        // 4. Gesamtverluste berechnen
+        // 5. Gesamtverluste berechnen
         let verlustGesamt = verteidigungen * verlusteProVert;
 
-        // 5. Werkzeuge berechnen
+        // 6. Werkzeuge berechnen
         let mauerWerkzeuge = Math.round(seiten * 48.8 * verteidigungen);
         let grabenWerkzeuge = Math.round(seiten * 11.2 * verteidigungen);
         let torWerkzeuge = Math.round(22.6 * verteidigungen);
@@ -226,6 +233,7 @@
         });
         
         document.getElementById('res_vert').innerText = verteidigungen.toLocaleString('de-DE');
+        document.getElementById('res_medaillen_ges').innerText = medaillenGesamt.toLocaleString('de-DE');
         document.getElementById('res_tafeln_ges').innerText = tafelnGesamt.toLocaleString('de-DE');
         document.getElementById('res_verlust_ges').innerText = verlustGesamt.toLocaleString('de-DE');
         

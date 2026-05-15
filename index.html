@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahnrechner V1</title>
+    <title id="title">Kahnrechner V1</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
-        .container { max-width: 950px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; border-bottom: 4px solid #f1c40f; padding-bottom: 10px; }
+        .container { max-width: 950px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 4px solid #f1c40f; padding-bottom: 10px; margin-top: 40px; }
+        
+        /* Sprachwechsler Style */
+        .lang-switch { position: absolute; top: 20px; right: 30px; }
+        .lang-switch select { padding: 6px 10px; border-radius: 5px; border: 2px solid #34495e; background: white; font-weight: bold; cursor: pointer; }
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
         .section { border: 1px solid #dfe6e9; padding: 20px; border-radius: 8px; background: #fff; }
@@ -31,51 +35,151 @@
 <body>
 
 <div class="container">
-    <h1>Kahnrechner</h1>
+    <div class="lang-switch">
+        <select id="langSelect">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <h1 id="main_title">Kahnrechner</h1>
 
     <div class="grid">
         <div class="section">
-            <div class="section-title">EINGABEWERTE</div>
+            <div class="section-title" id="t_eingabewerte">EINGABEWERTE</div>
             <table>
-                <tr><td>Dauer (Stunden)</td><td><input type="number" id="dauer" value="1.0" step="0.1"></td></tr>
-                <tr><td>Sicherheit (sec)</td><td><input type="number" id="sicherheit" value="4"></td></tr>
-                <tr><td>Kettenlänge</td><td><input type="number" id="kette" value="45"></td></tr>
-                <tr><td>Laufzeit zum Kahn (sec)</td><td><input type="number" id="laufzeit" value="70"></td></tr>
-                <tr><td>Anzahl Vert. Seiten</td><td><input type="number" id="seiten" value="2"></td></tr>
-                <tr><td>Medaillen pro Vert.</td><td><input type="number" id="medaillen" value="35000"></td></tr>
-                <tr><td>Tafeln pro Vert.</td><td><input type="number" id="tafeln_v" value="2500"></td></tr>
-                <tr><td>Truppenverlust / Vert.</td><td><input type="number" id="verlust_v" value="150"></td></tr>
+                <tr><td id="lbl_dauer">Dauer (Stunden)</td><td><input type="number" id="dauer" value="1.0" step="0.1"></td></tr>
+                <tr><td id="lbl_sicherheit">Sicherheit (sec)</td><td><input type="number" id="sicherheit" value="4"></td></tr>
+                <tr><td id="lbl_kette">Kettenlänge</td><td><input type="number" id="kette" value="45"></td></tr>
+                <tr><td id="lbl_laufzeit">Laufzeit zum Kahn (sec)</td><td><input type="number" id="laufzeit" value="70"></td></tr>
+                <tr><td id="lbl_seiten">Anzahl der Verteidigende Seiten</td><td><input type="number" id="seiten" value="2"></td></tr>
+                <tr><td id="lbl_medaillen">Medaillen pro Verteidigung</td><td><input type="number" id="medaillen" value="35000"></td></tr>
+                <tr><td id="lbl_tafeln_v">Tafeln pro Verteidigung</td><td><input type="number" id="tafeln_v" value="2500"></td></tr>
+                <tr><td id="lbl_verlust_v">Truppenverlust pro Verteidigung</td><td><input type="number" id="verlust_v" value="150"></td></tr>
             </table>
         </div>
 
         <div class="section">
-            <div class="section-title">Punkte</div>
+            <div class="section-title" id="t_punkte">Punkte</div>
             <table>
-                <tr><td>Verteidigungen</td><td class="output"><span id="res_vert">0</span></td></tr>
-                <tr><td>Punkte Endstand</td><td class="output green"><span id="res_punkte">0</span></td></tr>
-                <tr><td>Kahntafeln</td><td class="output orange"><span id="res_tafeln">0</span></td></tr>
-                <tr><td>Kahnmedaillen</td><td class="output yellow"><span id="res_kmed">0</span></td></tr>
+                <tr><td id="lbl_vert">Verteidigungen</td><td class="output"><span id="res_vert">0</span></td></tr>
+                <tr><td id="lbl_punkte">Punkte Endstand</td><td class="output green"><span id="res_punkte">0</span></td></tr>
+                <tr><td id="lbl_tafeln">Kahntafeln</td><td class="output orange"><span id="res_tafeln">0</span></td></tr>
+                <tr><td id="lbl_kmed">Kahnmedaillen</td><td class="output yellow"><span id="res_kmed">0</span></td></tr>
             </table>
             
-            <div class="section-title" style="margin-top: 20px;">Boosterzeit mit Truppenaufstellung</div>
+            <div class="section-title" style="margin-top: 20px;" id="t_booster">Boosterzeit mit Truppenaufstellung</div>
             <table>
-                <tr><td>Boosterzeit Netto (min)</td><td class="output"><span id="res_booster_min">0</span></td></tr>
+                <tr><td id="lbl_booster_min">Boosterzeit Netto (min)</td><td class="output"><span id="res_booster_min">0</span></td></tr>
             </table>
 
-            <div class="section-title" style="margin-top: 20px;">Truppen und Werkzeugverbrauch</div>
+            <div class="section-title" style="margin-top: 20px;" id="t_verbrauch">Truppen und Werkzeugverbrauch</div>
             <table>
-                <tr><td>Truppenverluste (Gesamt)</td><td class="output"><span id="res_verlust_ges">0</span></td></tr>
-                <tr><td>Mauerwerkzeug</td><td class="output"><span id="res_mauer">0</span></td></tr>
-                <tr><td>Grabenwerkzeug</td><td class="output"><span id="res_graben">0</span></td></tr>
-                <tr><td>Torwerkzeug</td><td class="output"><span id="res_tor">0</span></td></tr>
-            <table>
-                
+                <tr><td id="lbl_verlust_ges">Truppenverluste (Gesamt)</td><td class="output"><span id="res_verlust_ges">0</span></td></tr>
+                <tr><td id="lbl_mauer">Mauerwerkzeug</td><td class="output"><span id="res_mauer">0</span></td></tr>
+                <tr><td id="lbl_graben">Grabenwerkzeug</td><td class="output"><span id="res_graben">0</span></td></tr>
+                <tr><td id="lbl_tor">Torwerkzeug</td><td class="output"><span id="res_tor">0</span></td></tr>
             </table>
         </div>
     </div>
 </div>
 
 <script>
+    // Übersetzungs-Datenbank
+    const translations = {
+        de: {
+            title: "Kahnrechner V1",
+            main_title: "Kahnrechner",
+            t_eingabewerte: "EINGABEWERTE",
+            lbl_dauer: "Dauer (Stunden)",
+            lbl_sicherheit: "Sicherheit (sec)",
+            lbl_kette: "Kettenlänge",
+            lbl_laufzeit: "Laufzeit zum Kahn (sec)",
+            lbl_seiten: "Anzahl Vert. Seiten",
+            lbl_medaillen: "Medaillen pro Verteidigung",
+            lbl_tafeln_v: "Tafeln pro Vert.",
+            lbl_verlust_v: "Truppenverlust / Vert.",
+            t_punkte: "Punkte",
+            lbl_vert: "Verteidigungen",
+            lbl_punkte: "Punkte Endstand",
+            lbl_tafeln: "Kahntafeln",
+            lbl_kmed: "Kahnmedaillen",
+            t_booster: "Boosterzeit mit Truppenaufstellung",
+            lbl_booster_min: "Boosterzeit Netto (min)",
+            t_verbrauch: "Truppen und Werkzeugverbrauch",
+            lbl_verlust_ges: "Truppenverluste (Gesamt)",
+            lbl_mauer: "Mauerwerkzeug",
+            lbl_graben: "Grabenwerkzeug",
+            lbl_tor: "Torwerkzeug",
+            locale: "de-DE"
+        },
+        en: {
+            title: "Khan Calculator V1",
+            main_title: "Khan Calculator",
+            t_eingabewerte: "INPUT VALUES",
+            lbl_dauer: "Duration (Hours)",
+            lbl_sicherheit: "Safety (sec)",
+            lbl_kette: "Chain Length",
+            lbl_laufzeit: "Travel Time to Khan (sec)",
+            lbl_seiten: "Number of Defense Sides",
+            lbl_medaillen: "Medals per Defense",
+            lbl_tafeln_v: "Tablets per Defense",
+            lbl_verlust_v: "Troop Loss per Defense",
+            t_punkte: "Points",
+            lbl_vert: "Defenses",
+            lbl_punkte: "Final Score",
+            lbl_tafeln: "Khan Tablets",
+            lbl_kmed: "Khan Medals",
+            t_booster: "Booster Time with Troop Setup",
+            lbl_booster_min: "Net Booster Time (min)",
+            t_verbrauch: "Troop and Tool Consumption",
+            lbl_verlust_ges: "Troop Losses (Total)",
+            lbl_mauer: "Wall Tools",
+            lbl_graben: "Moat Tools",
+            lbl_tor: "Gate Tools",
+            locale: "en-US"
+        }
+    };
+
+    let currentLang = 'de';
+
+    function updateLanguage() {
+        const lang = document.getElementById('langSelect').value;
+        currentLang = lang;
+        const t = translations[lang];
+
+        // Texte im HTML austauschen
+        document.getElementById('title').innerText = t.title;
+        document.getElementById('main_title').innerText = t.main_title;
+        document.getElementById('t_eingabewerte').innerText = t.t_eingabewerte;
+        document.getElementById('lbl_dauer').innerText = t.lbl_dauer;
+        document.getElementById('lbl_sicherheit').innerText = t.lbl_sicherheit;
+        document.getElementById('lbl_kette').innerText = t.lbl_kette;
+        document.getElementById('lbl_laufzeit').innerText = t.lbl_laufzeit;
+        document.getElementById('lbl_seiten').innerText = t.lbl_seiten;
+        document.getElementById('lbl_medaillen').innerText = t.lbl_medaillen;
+        document.getElementById('lbl_tafeln_v').innerText = t.lbl_tafeln_v;
+        document.getElementById('lbl_verlust_v').innerText = t.lbl_verlust_v;
+        
+        document.getElementById('t_punkte').innerText = t.t_punkte;
+        document.getElementById('lbl_vert').innerText = t.lbl_vert;
+        document.getElementById('lbl_punkte').innerText = t.lbl_punkte;
+        document.getElementById('lbl_tafeln').innerText = t.lbl_tafeln;
+        document.getElementById('lbl_kmed').innerText = t.lbl_kmed;
+        
+        document.getElementById('t_booster').innerText = t.t_booster;
+        document.getElementById('lbl_booster_min').innerText = t.lbl_booster_min;
+        
+        document.getElementById('t_verbrauch').innerText = t.t_verbrauch;
+        document.getElementById('lbl_verlust_ges').innerText = t.lbl_verlust_ges;
+        document.getElementById('lbl_mauer').innerText = t.lbl_mauer;
+        document.getElementById('lbl_graben').innerText = t.lbl_graben;
+        document.getElementById('lbl_tor').innerText = t.lbl_tor;
+
+        // Berechnungen mit neuem Zahlenformat anstoßen
+        refresh();
+    }
+
     function refresh() {
         // Inputs
         const h = parseFloat(document.getElementById('dauer').value) || 0;
@@ -109,23 +213,31 @@
         const graben_ges = seiten * 11.2 * vert;
         const tor_ges = 22.6 * vert;
 
-        // UI Update
-        document.getElementById('res_booster_min').innerText = boosterzeit_netto_min.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        document.getElementById('res_vert').innerText = vert.toLocaleString('de-DE');
-        document.getElementById('res_punkte').innerText = punkte_gesamt.toLocaleString('de-DE');
-        document.getElementById('res_tafeln').innerText = (vert * tafeln_v).toLocaleString('de-DE');
-        document.getElementById('res_kmed').innerText = (vert * med).toLocaleString('de-DE');
+        // Aktuelles Zahlenformat holen (de-DE oder en-US)
+        const currentLocale = translations[currentLang].locale;
+
+        // UI Update mit passender Formatierung
+        document.getElementById('res_booster_min').innerText = boosterzeit_netto_min.toLocaleString(currentLocale, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res_vert').innerText = vert.toLocaleString(currentLocale);
+        document.getElementById('res_punkte').innerText = punkte_gesamt.toLocaleString(currentLocale);
+        document.getElementById('res_tafeln').innerText = (vert * tafeln_v).toLocaleString(currentLocale);
+        document.getElementById('res_kmed').innerText = (vert * med).toLocaleString(currentLocale);
         
-        document.getElementById('res_verlust_ges').innerText = verlust_gesamt.toLocaleString('de-DE');
-        document.getElementById('res_mauer').innerText = Math.round(mauer_ges).toLocaleString('de-DE');
-        document.getElementById('res_graben').innerText = Math.round(graben_ges).toLocaleString('de-DE');
-        document.getElementById('res_tor').innerText = Math.round(tor_ges).toLocaleString('de-DE');
+        document.getElementById('res_verlust_ges').innerText = verlust_gesamt.toLocaleString(currentLocale);
+        document.getElementById('res_mauer').innerText = Math.round(mauer_ges).toLocaleString(currentLocale);
+        document.getElementById('res_graben').innerText = Math.round(graben_ges).toLocaleString(currentLocale);
+        document.getElementById('res_tor').innerText = Math.round(tor_ges).toLocaleString(currentLocale);
     }
 
+    // Event Listener für Inputs
     document.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', refresh);
     });
 
+    // Event Listener für Sprachauswahl
+    document.getElementById('langSelect').addEventListener('change', updateLanguage);
+
+    // Initialer Start (Standard: Deutsch)
     refresh();
 </script>
 

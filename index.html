@@ -276,6 +276,7 @@
                     <option value="kahn" data-i18n="app_kahn">Kahnrechner</option>
                     <option value="liga" data-i18n="app_liga">Liga Rechner</option>
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
+                    <option value="berater">Berater Rechner</option>
                     <option value="changelog" data-i18n="app_changelog">Changelog</option>
                 </select>
             </div>
@@ -650,6 +651,53 @@
                         <td class="output green"><span id="bx_res_punkte">0</span></td>
                     </tr>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="view_berater" class="app-view">
+        <div class="grid">
+            <div class="section">
+                <div class="section-title">Berater Eingabewerte</div>
+                <table class="calc-table">
+                    <tr>
+                        <td>Laufzeit (min)</td>
+                        <td><input type="number" id="berater_laufzeit" value="60" min="0" class="berater-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Punkte pro Angriff (Punkte p.A)</td>
+                        <td><input type="number" id="berater_punkte_pa" value="1950" min="0" class="berater-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Anzahl der FHs</td>
+                        <td><input type="number" id="berater_fhs" value="50" min="0" class="berater-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Laufzeit in sec</td>
+                        <td><input type="number" id="berater_laufzeit_sec" value="65" min="0" class="berater-field"></td>
+                    </tr>
+                    <tr>
+                        <td>Rückkehrzeit (sec)</td>
+                        <td><input type="number" id="berater_rueckkehrzeit" value="15" min="0" class="berater-field"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="right-column">
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title">Ergebnisse</div>
+                    <table class="calc-table">
+                        <tr>
+                            <td>Angriffe ges.</td>
+                            <td class="output blue"><span id="berater_res_angriffe">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>Punkte gesamt</td>
+                            <td class="output green"><span id="berater_res_punkte">0</span></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -1160,6 +1208,34 @@
     refreshKahn();
     refreshLiga();
     refreshBerimond();
+
+    // --- Berater Rechner Logic ---
+    function refreshBerater() {
+        let laufzeit_min = parseFloat(document.getElementById('berater_laufzeit').value) || 0;
+        let punkte_pa = parseFloat(document.getElementById('berater_punkte_pa').value) || 0;
+        let anzahl_fhs = parseFloat(document.getElementById('berater_fhs').value) || 0;
+        let laufzeit_sec = parseFloat(document.getElementById('berater_laufzeit_sec').value) || 0;
+        let rueckkehrzeit = parseFloat(document.getElementById('berater_rueckkehrzeit').value) || 0;
+
+        let y = laufzeit_min * 60;
+        
+        let x = 0;
+        if ((laufzeit_sec + rueckkehrzeit) > 0) {
+            x = y / (laufzeit_sec + rueckkehrzeit);
+        }
+
+        let angriffe_ges = x * anzahl_fhs;
+        let punkte_ges = angriffe_ges * punkte_pa;
+
+        document.getElementById('berater_res_angriffe').innerText = Math.round(angriffe_ges).toLocaleString(currentLocale);
+        document.getElementById('berater_res_punkte').innerText = Math.round(punkte_ges).toLocaleString(currentLocale);
+    }
+
+    document.querySelectorAll('.berater-field').forEach(el => el.addEventListener('input', refreshBerater));
+    
+    // Call initial calculation for Berater
+    refreshBerater();
+
 </script>
 
 </body>

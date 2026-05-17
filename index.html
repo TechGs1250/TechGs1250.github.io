@@ -62,6 +62,22 @@
             width: auto;
         }
 
+        /* Neuer Button Style */
+        .header-btn {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .header-btn:hover {
+            background: #2c3e50;
+        }
+
         .grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -212,6 +228,40 @@
             padding-left: 5px;
             color: #2c3e50;
         }
+
+        /* Changelog Styling */
+        .changelog-entry {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .changelog-entry:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .changelog-date {
+            font-weight: bold;
+            color: #2980b9;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .changelog-list {
+            margin: 0;
+            padding-left: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* About Highlight Box */
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
@@ -226,6 +276,7 @@
                     <option value="kahn" data-i18n="app_kahn">Kahnrechner</option>
                     <option value="liga" data-i18n="app_liga">Liga Rechner</option>
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
+                    <option value="changelog" data-i18n="app_changelog">Changelog</option>
                 </select>
             </div>
 
@@ -235,6 +286,8 @@
                     <option value="en">🇬🇧 English</option>
                 </select>
             </div>
+            
+            <button id="btnAbout" class="header-btn" data-i18n="btn_about">Über</button>
         </div>
     </div>
 
@@ -601,6 +654,62 @@
         </div>
     </div>
 
+    <div id="view_changelog" class="app-view">
+        <div class="section">
+            <div class="section-title" data-i18n="app_changelog">Changelog</div>
+            
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_2_date">Version 1.2 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_2_desc">
+                    <li>Hinzufügen des Berimond Rechners.</li>
+                    <li>Gleichzeitige Berechnung für Einzelspieler und Gruppen.</li>
+                    <li>Neue Navigation und Dropdown für die App-Auswahl integriert.</li>
+                    <li>Hinzufügen dieses Changelogs.</li>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_1_date">Version 1.1</div>
+                <ul class="changelog-list" data-i18n="cl_v1_1_desc">
+                    <li>Neuer Liga Rechner hinzugefügt.</li>
+                    <li>Basiswert von 2.000 Punkten im Liga Rechner integriert.</li>
+                    <li>Rote Markierung eingefügt für Titel, deren benötigte Medaillen die Restlänge übersteigen.</li>
+                    <li>Referenz-Tabelle für Liga-Titel und Belohnungen eingebaut.</li>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_0_date">Version 1.0</div>
+                <ul class="changelog-list" data-i18n="cl_v1_0_desc">
+                    <li>Startversion: Veröffentlichung des Kahnrechners.</li>
+                    <li>Berechnung von Werkzeugverbrauch, Ausbeute (Münzen, Tafeln) und Gesamtkosten.</li>
+                    <li>Mehrsprachigkeit (Deutsch / Englisch) eingebaut.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="view_about" class="app-view">
+        <div class="section">
+            <div class="section-title" data-i18n="app_about">Über das Tool</div>
+            <p data-i18n="about_text_1" style="line-height: 1.6; color: #444;">
+                Dieses Tool vereint verschiedene Rechner (Kahn, Liga, Berimond), um die Planung und Berechnung von Events zu erleichtern.
+            </p>
+            <p data-i18n="about_text_2" style="line-height: 1.6; color: #444; margin-bottom: 20px;">
+                Durch das Ausfüllen der gelb markierten Felder können schnell Ausbeute, benötigte Werkzeuge, Kostenpunkte sowie Laufzeiten und Medaillen-Ziele berechnet werden.
+            </p>
+            
+            <div class="highlight-box">
+                <p data-i18n="about_text_3" style="margin: 0 0 10px 0;">
+                    Bei Fehlern oder Problemen bitte auf Discord bei <strong>paulsolo224</strong> melden.
+                </p>
+                <p data-i18n="about_text_4" style="margin: 0; font-style: italic;">
+                    Dieses komplette Tool wurde mit der Hilfe von <strong>Google Gemini</strong> programmiert.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="disclaimer-box" data-i18n="disclaimer" style="margin-top: 20px;">
         Alle Angaben sind ohne Gewähr.
     </div>
@@ -614,6 +723,9 @@
             app_kahn: "Kahnrechner",
             app_liga: "Liga Rechner",
             app_berimond: "Berimond Rechner",
+            app_changelog: "Changelog",
+            app_about: "Über das Tool",
+            btn_about: "Über",
             inputs: "Eingabewerte",
             duration: "Dauer (in Stunden)",
             medals: "Gewonnene Kahnmedaillen",
@@ -698,13 +810,30 @@
             beri_att_ph: "Angriffe pro h",
             beri_att_sph: "Angriffe pro (Sp./h)",
             beri_att_total: "Angriffe",
-            beri_points: "Punkte Endstand"
+            beri_points: "Punkte Endstand",
+
+            // Changelog
+            cl_v1_2_date: "Version 1.2 - Aktuell",
+            cl_v1_2_desc: "<li>Hinzufügen des Berimond Rechners.</li><li>Gleichzeitige Berechnung für Einzelspieler und Gruppen.</li><li>Neue Navigation und Dropdown für die App-Auswahl integriert.</li><li>Hinzufügen dieses Changelogs.</li>",
+            cl_v1_1_date: "Version 1.1",
+            cl_v1_1_desc: "<li>Neuer Liga Rechner hinzugefügt.</li><li>Basiswert von 2.000 Punkten im Liga Rechner integriert.</li><li>Rote Markierung eingefügt für Titel, deren benötigte Medaillen die Restlänge übersteigen.</li><li>Referenz-Tabelle für Liga-Titel und Belohnungen eingebaut.</li>",
+            cl_v1_0_date: "Version 1.0",
+            cl_v1_0_desc: "<li>Startversion: Veröffentlichung des Kahnrechners.</li><li>Berechnung von Werkzeugverbrauch, Ausbeute (Münzen, Tafeln) und Gesamtkosten.</li><li>Mehrsprachigkeit (Deutsch / Englisch) eingebaut.</li>",
+
+            // Über 
+            about_text_1: "Dieses Tool vereint verschiedene Rechner (Kahn, Liga, Berimond), um die Planung und Berechnung von Events zu erleichtern.",
+            about_text_2: "Durch das Ausfüllen der gelb markierten Felder können schnell Ausbeute, benötigte Werkzeuge, Kostenpunkte sowie Laufzeiten und Medaillen-Ziele berechnet werden.",
+            about_text_3: "Bei Fehlern oder Problemen bitte auf Discord bei <strong>paulsolo224</strong> melden.",
+            about_text_4: "Dieses komplette Tool wurde mit der Hilfe von <strong>Google Gemini</strong> programmiert."
         },
         en: {
             title: "Khan, League & Berimond Calculator",
             app_kahn: "Khan Calculator",
             app_liga: "League Calculator",
             app_berimond: "Berimond Calculator",
+            app_changelog: "Changelog",
+            app_about: "About the Tool",
+            btn_about: "About",
             inputs: "Input Values",
             duration: "Duration (in hours)",
             medals: "Earned Khan Medals",
@@ -789,7 +918,21 @@
             beri_att_ph: "Attacks per h",
             beri_att_sph: "Attacks per (Pl./h)",
             beri_att_total: "Attacks",
-            beri_points: "Final Score"
+            beri_points: "Final Score",
+
+            // Changelog
+            cl_v1_2_date: "Version 1.2 - Current",
+            cl_v1_2_desc: "<li>Added the Berimond Calculator.</li><li>Simultaneous calculation for single players and groups.</li><li>Integrated new navigation and dropdown for app selection.</li><li>Added this changelog.</li>",
+            cl_v1_1_date: "Version 1.1",
+            cl_v1_1_desc: "<li>Added new League Calculator.</li><li>Integrated base value of 2,000 points in League Calculator.</li><li>Added red highlights for titles where required medals exceed remaining length.</li><li>Added reference table for League titles and rewards.</li>",
+            cl_v1_0_date: "Version 1.0",
+            cl_v1_0_desc: "<li>Initial release: Khan Calculator.</li><li>Calculation of tool consumption, yields (coins, tablets), and total costs.</li><li>Integrated multi-language support (German / English).</li>",
+
+            // Über
+            about_text_1: "This tool combines various calculators (Khan, League, Berimond) to facilitate event planning and calculation.",
+            about_text_2: "By filling in the fields marked in yellow, you can quickly calculate yields, required tools, costs, as well as runtimes and medal targets.",
+            about_text_3: "In case of errors or issues, please contact <strong>paulsolo224</strong> on Discord.",
+            about_text_4: "This entire tool was programmed with the help of <strong>Google Gemini</strong>."
         }
     };
 
@@ -822,11 +965,9 @@
             }
         });
         
-        // Main Titel updaten
-        let selApp = document.getElementById('appSelect').value;
-        if(selApp === 'kahn') document.getElementById('main_title').innerText = translations[lang]['app_kahn'];
-        if(selApp === 'liga') document.getElementById('main_title').innerText = translations[lang]['app_liga'];
-        if(selApp === 'berimond') document.getElementById('main_title').innerText = translations[lang]['app_berimond'];
+        // Main Titel updaten basierend auf aktuell aktiver Ansicht
+        let activeView = document.querySelector('.app-view.active').id.replace('view_', '');
+        document.getElementById('main_title').innerText = translations[lang]['app_' + activeView];
 
         buildLigaTables();
         refreshKahn();
@@ -834,14 +975,18 @@
         refreshBerimond();
     }
 
-    // Event-Listener für App-Auswahl (Navigation)
+    // Event-Listener für App-Auswahl (Dropdown)
     document.getElementById('appSelect').addEventListener('change', function(e) {
-        // Views toggeln
         document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
         document.getElementById('view_' + e.target.value).classList.add('active');
-
-        // Main Title updaten
         document.getElementById('main_title').innerText = translations[currentLangCode]['app_' + e.target.value];
+    });
+
+    // Event-Listener für "Über" Button
+    document.getElementById('btnAbout').addEventListener('click', function() {
+        document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+        document.getElementById('view_about').classList.add('active');
+        document.getElementById('main_title').innerText = translations[currentLangCode]['app_about'];
     });
 
     document.getElementById('languageSelect').addEventListener('change', function(e) {

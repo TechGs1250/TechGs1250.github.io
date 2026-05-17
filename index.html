@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahnrechner V2.5</title>
+    <title>Kahnrechner V1.1</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -80,6 +80,16 @@
             border-color: #d4ac0d; 
             background-color: #ffffa3; 
         }
+
+        select {
+            border: 2px solid #f1c40f;
+            background-color: #ffffcc;
+            padding: 6px;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 0.9em;
+            outline: none;
+        }
         
         .output { 
             text-align: right; 
@@ -90,6 +100,7 @@
         .green { color: #27ae60; }
         .blue { color: #2980b9; }
         .orange { color: #d35400; }
+        .yellow { color: #f39c12; }
 
         /* Disclaimer Styling */
         .disclaimer-box {
@@ -102,6 +113,7 @@
             text-align: center;
             font-size: 0.85em;
             font-style: italic;
+            margin-bottom: 25px;
         }
     </style>
 </head>
@@ -154,6 +166,10 @@
                         <td class="output blue"><span id="res_vert">0</span></td>
                     </tr>
                     <tr>
+                        <td>Gewonnene Münzen</td>
+                        <td class="output green"><span id="res_muenzen_gew">0</span></td>
+                    </tr>
+                    <tr>
                         <td>Gesamt Kahnmedaillen</td>
                         <td class="output orange"><span id="res_medaillen_ges">0</span></td>
                     </tr>
@@ -187,8 +203,48 @@
             </div>
         </div>
     </div>
+    <div class="section">
+        <div class="section-title">Werkzeugkosten (in Münzen)</div>
+        <table>
+            <tr>
+                <td>
+                    Mauerwerkzeug-Kosten 
+                    <select id="mauer_typ" style="margin-left: 10px;">
+                        <option value="3210">Pfeile (3.210)</option>
+                        <option value="550">Steine (550)</option>
+                         <option value="0">Event Werkzeug (0)</option>
+                    </select>
+                </td>
+                <td class="output"><span id="kosten_mauer">0</span></td>
+            </tr>
+            <tr>
+                <td>
+                    Grabenwerkzeug-Kosten 
+                    <select id="graben_typ" style="margin-left: 10px;">
+                        <option value="5780">Münzen (5.780)</option>
+                        <option value="0">Event Werkzeug (0)</option>
+                    </select>
+                </td>
+                <td class="output"><span id="kosten_graben">0</span></td>
+            </tr>
+            <tr>
+                <td>
+                    Torwerkzeugkosten-Kosten 
+                    <select id="tor_typ" style="margin-left: 10px;">
+                        <option value="1720">Münzen (1.720)</option>
+                        <option value="0">Event Werkzeug (0)</option>
+                    </select>
+                </td>
+                <td class="output"><span id="kosten_tor">0</span></td>
+            </tr>
+            <tr>
+                <td><strong>Gesamtkosten</strong></td>
+                <td class="output orange"><span id="kosten_gesamt">0</span></td>
+            </tr>
+        </table>
+    </div>
 
-    <div class="disclaimer-box">
+        <div class="disclaimer-box">
         Alle Angaben sind ohne Gewähr.
     </div>
 </div>
@@ -226,7 +282,20 @@
         let grabenWerkzeuge = Math.round(seiten * 11.2 * verteidigungen);
         let torWerkzeuge = Math.round(22.6 * verteidigungen);
 
-        // Anzeige formatieren
+        // 7. Werkzeugkosten berechnen
+        let mauerKostenTyp = parseInt(document.getElementById('mauer_typ').value) || 0;
+        let grabenKostenTyp = parseInt(document.getElementById('graben_typ').value) || 0;
+        let torKostenTyp = parseInt(document.getElementById('tor_typ').value) || 0;
+
+        let kostenMauer = mauerWerkzeuge * mauerKostenTyp;
+        let kostenGraben = grabenWerkzeuge * grabenKostenTyp;
+        let kostenTor = torWerkzeuge * torKostenTyp;
+        let kostenGesamt = kostenMauer + kostenGraben + kostenTor;
+
+        // 8. Gewonnene Münzen berechnen
+        let muenzenGewonnen = verteidigungen * 30000;
+
+        // Anzeige formatieren (Bisherige Werte)
         document.getElementById('res_punkte').innerText = punkte.toLocaleString('de-DE', {
             minimumFractionDigits: 0, 
             maximumFractionDigits: 0
@@ -240,12 +309,28 @@
         document.getElementById('res_mauer').innerText = mauerWerkzeuge.toLocaleString('de-DE');
         document.getElementById('res_graben').innerText = grabenWerkzeuge.toLocaleString('de-DE');
         document.getElementById('res_tor').innerText = torWerkzeuge.toLocaleString('de-DE');
+
+        // Anzeige gewonnene Münzen
+        document.getElementById('res_muenzen_gew').innerText = muenzenGewonnen.toLocaleString('de-DE');
+
+        // Anzeige formatieren (Kosten)
+        document.getElementById('kosten_mauer').innerText = kostenMauer.toLocaleString('de-DE');
+        document.getElementById('kosten_graben').innerText = kostenGraben.toLocaleString('de-DE');
+        document.getElementById('kosten_tor').innerText = kostenTor.toLocaleString('de-DE');
+        document.getElementById('kosten_gesamt').innerText = kostenGesamt.toLocaleString('de-DE');
     }
 
+    // Event-Listener für Eingabefelder
     document.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', refresh);
     });
 
+    // Event-Listener für Dropdown-Menüs
+    document.getElementById('mauer_typ').addEventListener('change', refresh);
+    document.getElementById('graben_typ').addEventListener('change', refresh);
+    document.getElementById('tor_typ').addEventListener('change', refresh);
+
+    // Initialer Aufruf
     refresh();
 </script>
 

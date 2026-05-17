@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahnrechner V1.1</title>
+    <title data-i18n="title">Kahnrechner, Liga & Berimond</title>
+    <link rel="icon" type="image/png" href="Kahn.png">
+    
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -12,7 +14,7 @@
             color: #333; 
         }
         .container { 
-            max-width: 950px; 
+            max-width: 1050px; 
             margin: auto; 
             background: white; 
             padding: 30px; 
@@ -20,13 +22,46 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
             position: relative; 
         }
-        h1 { 
-            text-align: center; 
-            color: #2c3e50; 
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 4px solid #f1c40f; 
-            padding-bottom: 10px; 
-            margin-top: 20px; 
+            padding-bottom: 10px;
+            margin-top: 10px;
         }
+
+        h1 { 
+            color: #2c3e50; 
+            margin: 0;
+            flex: 1;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-switcher {
+            font-size: 1em;
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .header-switcher select {
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            width: auto;
+        }
+
         .grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -40,8 +75,10 @@
             gap: 25px;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .grid { grid-template-columns: 1fr; }
+            .header-container { flex-direction: column; gap: 15px; text-align: center; }
+            .header-controls { flex-direction: column; width: 100%; }
         }
 
         .section { 
@@ -49,6 +86,7 @@
             padding: 20px; 
             border-radius: 8px; 
             background: #fff; 
+            margin-bottom: 25px;
         }
         .section-title { 
             font-weight: bold; 
@@ -61,36 +99,29 @@
             text-transform: uppercase;
         }
         
-        table { width: 100%; border-collapse: collapse; }
-        td { padding: 10px 5px; border-bottom: 1px solid #f1f1f1; }
-        td:first-child { font-weight: 500; }
+        table.calc-table { width: 100%; border-collapse: collapse; }
+        table.calc-table th { text-align: left; padding: 10px 5px; border-bottom: 2px solid #ccc; font-weight: bold; }
+        table.calc-table td { padding: 10px 5px; border-bottom: 1px solid #f1f1f1; }
+        table.calc-table td:first-child { font-weight: 500; }
         
-        input { 
+        input[type="number"], select.tool-select { 
             width: 120px; 
             text-align: right; 
             border: 2px solid #f1c40f; 
-            background-color: #ffffcc; 
+            background-color: #ffffcc; /* Gelbe Markierung für Eingabefelder */
             padding: 8px; 
             font-weight: bold; 
             border-radius: 5px; 
             font-size: 1em;
+            outline: none;
         }
-        input:focus { 
-            outline: none; 
+        input[type="number"]:focus, select.tool-select:focus { 
             border-color: #d4ac0d; 
             background-color: #ffffa3; 
         }
-
-        select {
-            border: 2px solid #f1c40f;
-            background-color: #ffffcc;
-            padding: 6px;
-            font-weight: bold;
-            border-radius: 5px;
-            font-size: 0.9em;
-            outline: none;
-        }
         
+        select.tool-select { width: auto; font-size: 0.9em; padding: 6px; }
+
         .output { 
             text-align: right; 
             font-weight: bold; 
@@ -101,10 +132,65 @@
         .blue { color: #2980b9; }
         .orange { color: #d35400; }
         .yellow { color: #f39c12; }
+        .black { color: #000; }
+
+        /* Styling für Datentabellen (Matrix) */
+        .data-table-container {
+            overflow-x: auto;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            border: 2px solid #000;
+            font-size: 0.9em;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #000;
+            padding: 6px;
+            min-width: 60px;
+        }
+        .data-table th {
+            font-weight: bold;
+        }
+        /* Farben aus dem Screenshot */
+        .bg-orange-cell { background-color: #fbd4b4; }
+        .bg-blue-cell { background-color: #b8cce4; }
+        .bg-green-cell { background-color: #c4d79b; }
+        .bg-purple-cell { background-color: #ccc0da; }
+        .bg-pink-cell { background-color: #d99694; }
+        .bg-darkgrey { background-color: #595959; height: 15px; }
+        .bg-lightgrey { background-color: #e6e6e6; }
+
+        /* Scrollbare Titel-Tabelle */
+        .scrollable-table {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+        .scrollable-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+        .scrollable-table th {
+            position: sticky;
+            top: 0;
+            background: #f1f1f1;
+            z-index: 1;
+            padding: 6px;
+            border-bottom: 1px solid #000;
+        }
+        .scrollable-table td {
+            padding: 6px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        .scrollable-table td:first-child { text-align: left; font-weight: bold; }
 
         /* Disclaimer Styling */
         .disclaimer-box {
-            margin-top: 30px;
             padding: 15px;
             background-color: #f9f9f9;
             border: 1px solid #eee;
@@ -113,145 +199,659 @@
             text-align: center;
             font-size: 0.85em;
             font-style: italic;
-            margin-bottom: 25px;
+        }
+
+        /* App visibility */
+        .app-view { display: none; }
+        .app-view.active { display: block; }
+        
+        /* Fester Text Stil für Ligarechner */
+        .fixed-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            padding-left: 5px;
+            color: #2c3e50;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Kahnrechner</h1>
+    <div class="header-container">
+        <h1 id="main_title" data-i18n="app_kahn">Kahnrechner</h1>
+        
+        <div class="header-controls">
+            <div class="header-switcher">
+                <select id="appSelect">
+                    <option value="kahn" data-i18n="app_kahn">Kahnrechner</option>
+                    <option value="liga" data-i18n="app_liga">Liga Rechner</option>
+                    <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
+                </select>
+            </div>
 
-    <div class="grid">
+            <div class="header-switcher">
+                <select id="languageSelect">
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="view_kahn" class="app-view active">
+        <div class="grid">
+            <div class="section">
+                <div class="section-title" data-i18n="inputs">Eingabewerte</div>
+                <table class="calc-table">
+                    <tr>
+                        <td data-i18n="duration">Dauer (in Stunden)</td>
+                        <td><input type="number" id="dauer" value="1.0" step="0.1" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="medals">Gewonnene Kahnmedaillen</td>
+                        <td><input type="number" id="medaillen" value="35000" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="chain">Kettenlänge</td>
+                        <td><input type="number" id="kettenlaenge" value="45" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="tablets">Tafeln pro Verteidigung</td>
+                        <td><input type="number" id="tafeln" value="2500" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="losses_input">Verluste</td>
+                        <td><input type="number" id="verluste" value="150" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="sides">Anzahl der vert. Seiten</td>
+                        <td><input type="number" id="seiten" value="2" min="0"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="right-column">
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="results">Ergebnisse</div>
+                    <table class="calc-table">
+                        <tr>
+                            <td data-i18n="points">Punkte Endstand</td>
+                            <td class="output green"><span id="res_punkte">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="defenses">Anzahl der Verteidigungen</td>
+                            <td class="output blue"><span id="res_vert">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="coins">Gewonnene Münzen</td>
+                            <td class="output green"><span id="res_muenzen_gew">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="total_medals">Gesamt Kahnmedaillen</td>
+                            <td class="output orange"><span id="res_medaillen_ges">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="total_tablets">Gesamt Kahntafeln</td>
+                            <td class="output yellow"><span id="res_tafeln_ges">0</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="tool_usage">Werkzeug Verbrauch und Verluste</div>
+                    <table class="calc-table">
+                        <tr>
+                            <td data-i18n="total_losses">Gesamtverluste</td>
+                            <td class="output"><span id="res_verlust_ges">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="wall_tools">Mauer-Werkzeuge</td>
+                            <td class="output black"><span id="res_mauer">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="moat_tools">Graben-Werkzeuge</td>
+                            <td class="output black"><span id="res_graben">0</span></td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="gate_tools">Tor-Werkzeuge</td>
+                            <td class="output black"><span id="res_tor">0</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
         <div class="section">
-            <div class="section-title">Eingabewerte</div>
-            <table>
+            <div class="section-title" data-i18n="tool_costs">Werkzeugkosten (in Münzen)</div>
+            <table class="calc-table">
                 <tr>
-                    <td>Dauer (in Stunden)</td>
-                    <td><input type="number" id="dauer" value="1.0" step="0.1" min="0"></td>
+                    <td>
+                        <span data-i18n="wall_costs">Mauerwerkzeug-Kosten</span> 
+                        <select id="mauer_typ" class="tool-select" style="margin-left: 10px;">
+                            <option value="3210" data-i18n="fire_arrows">Feuerpfeile (3.210)</option>
+                            <option value="550" data-i18n="stones">Wurfsteine (550)</option>
+                             <option value="0" data-i18n="event_tool">Event Werkzeug (0)</option>
+                        </select>
+                    </td>
+                    <td class="output"><span id="kosten_mauer">0</span></td>
                 </tr>
                 <tr>
-                    <td>Gewonnene Kahnmedaillen</td>
-                    <td><input type="number" id="medaillen" value="35000" min="0"></td>
+                    <td>
+                        <span data-i18n="moat_costs">Grabenwerkzeug-Kosten</span> 
+                        <select id="graben_typ" class="tool-select" style="margin-left: 10px;">
+                            <option value="5780" data-i18n="stakes">Angespitzte Pflöcke (5.780)</option>
+                            <option value="0" data-i18n="event_tool">Event Werkzeug (0)</option>
+                        </select>
+                    </td>
+                    <td class="output"><span id="kosten_graben">0</span></td>
                 </tr>
                 <tr>
-                    <td>Kettenlänge</td>
-                    <td><input type="number" id="kettenlaenge" value="45" min="0"></td>
+                    <td>
+                        <span data-i18n="gate_costs">Torwerkzeugkosten-Kosten</span> 
+                        <select id="tor_typ" class="tool-select" style="margin-left: 10px;">
+                            <option value="1720" data-i18n="gate_reinf">Burgtor- Verstärkung (1.720)</option>
+                            <option value="0" data-i18n="event_tool">Event Werkzeug (0)</option>
+                        </select>
+                    </td>
+                    <td class="output"><span id="kosten_tor">0</span></td>
                 </tr>
                 <tr>
-                    <td>Tafeln pro Verteidigung</td>
-                    <td><input type="number" id="tafeln" value="2500" min="0"></td>
-                </tr>
-                <tr>
-                    <td>Verluste</td>
-                    <td><input type="number" id="verluste" value="150" min="0"></td>
-                </tr>
-                <tr>
-                    <td>Anzahl der vert. Seiten</td>
-                    <td><input type="number" id="seiten" value="2" min="0"></td>
+                    <td><strong data-i18n="total_costs_label">Gesamtkosten</strong></td>
+                    <td class="output orange"><span id="kosten_gesamt">0</span></td>
                 </tr>
             </table>
         </div>
 
-        <div class="right-column">
+        <div class="section data-table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th colspan="7" style="font-size: 1.2em; font-weight: bold; background-color: #fff; border-bottom: 2px solid #000;" data-i18n="table_title">
+                            Ohne Eventwerkzeug nur Graben (Mitte + Flanke)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="bg-lightgrey"></th>
+                        <th class="bg-lightgrey"></th>
+                        <th class="bg-orange-cell" data-i18n="expert">Experte</th>
+                        <th class="bg-blue-cell" data-i18n="expert_plus">Experte +</th>
+                        <th class="bg-green-cell" data-i18n="master">Meister</th>
+                        <th class="bg-purple-cell" data-i18n="master_plus">Meister +</th>
+                        <th class="bg-pink-cell" data-i18n="grandmaster">Erzmeister</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-orange-cell"></td><td class="bg-blue-cell">5.150</td><td class="bg-green-cell"></td><td class="bg-purple-cell">9.500</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">500%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">30.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">600%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">35.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">800%</td><td class="bg-orange-cell">27.500</td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">45.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">30€</td><td class="bg-lightgrey">1000%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">55.000</td><td class="bg-pink-cell">75.000</td></tr>
+                    <tr><td class="bg-lightgrey">50€</td><td class="bg-lightgrey">1400%</td><td class="bg-orange-cell">48.000</td><td class="bg-blue-cell">51.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">70.000</td><td class="bg-pink-cell">102.000</td></tr>
+                    <tr><td class="bg-lightgrey">100€</td><td class="bg-lightgrey">1700%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell"></td><td class="bg-pink-cell"></td></tr>
+                    
+                    <tr><td colspan="7" class="bg-darkgrey"></td></tr>
+
+                    <tr>
+                        <td colspan="2" class="bg-lightgrey" style="text-align: left;" data-i18n="khandef">Kahndeff Verluste</td>
+                        <td class="bg-orange-cell">200</td><td class="bg-blue-cell">240</td><td class="bg-green-cell">1.000</td><td class="bg-purple-cell">1.500</td><td class="bg-pink-cell">2.500</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="bg-lightgrey" style="text-align: left;" data-i18n="metdef">Metdeff Verluste</td>
+                        <td class="bg-orange-cell"></td><td class="bg-blue-cell">140</td><td class="bg-green-cell"></td><td class="bg-purple-cell">700</td><td class="bg-pink-cell">1.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="view_liga" class="app-view">
+        <div class="grid">
             <div class="section">
-                <div class="section-title">Ergebnisse</div>
-                <table>
+                <div class="section-title" data-i18n="liga_inputs_title">Liga Eingabewerte</div>
+                <table class="calc-table">
                     <tr>
-                        <td>Punkte Endstand</td>
-                        <td class="output green"><span id="res_punkte">0</span></td>
+                        <td data-i18n="liga_length">Liga Länge</td>
+                        <td class="fixed-text">42</td>
                     </tr>
                     <tr>
-                        <td>Anzahl der Verteidigungen</td>
-                        <td class="output blue"><span id="res_vert">0</span></td>
+                        <td data-i18n="liga_notplayed">Nicht gespielt</td>
+                        <td class="fixed-text">0</td>
                     </tr>
                     <tr>
-                        <td>Gewonnene Münzen</td>
-                        <td class="output green"><span id="res_muenzen_gew">0</span></td>
+                        <td data-i18n="liga_rest">Restlänge</td>
+                        <td><input type="number" id="liga_rest" value="12" min="0" class="liga-field"></td>
+                    </tr>
+                </table>
+
+                <h3 style="margin-top: 30px; border-bottom: 2px solid #34495e; padding-bottom: 5px;" data-i18n="liga_medals_title">Medaillen & Punkte</h3>
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th data-i18n="liga_medal">Medaille</th>
+                            <th data-i18n="liga_pts">Punkte</th>
+                            <th data-i18n="liga_amount" style="text-align: right;">Anzahl</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td data-i18n="liga_gold">Gold</td><td>1.000</td><td><input type="number" id="l_anz_0" value="8" min="0" class="liga-field"></td></tr>
+                        <tr><td>2</td><td data-i18n="liga_silver">Silber</td><td>950</td><td><input type="number" id="l_anz_1" value="12" min="0" class="liga-field"></td></tr>
+                        <tr><td>3</td><td data-i18n="liga_bronze">Bronze</td><td>850</td><td><input type="number" id="l_anz_2" value="3" min="0" class="liga-field"></td></tr>
+                        <tr><td>4</td><td data-i18n="liga_glass">Glass</td><td>700</td><td><input type="number" id="l_anz_3" value="1" min="0" class="liga-field"></td></tr>
+                        <tr><td>5</td><td data-i18n="liga_copper">Kupfer</td><td>500</td><td><input type="number" id="l_anz_4" value="0" min="0" class="liga-field"></td></tr>
+                        <tr><td>6</td><td data-i18n="liga_stone">Stein</td><td>300</td><td><input type="number" id="l_anz_5" value="4" min="0" class="liga-field"></td></tr>
+                        <tr><td>7-10</td><td data-i18n="liga_wood">Holz</td><td>100</td><td><input type="number" id="l_anz_6" value="2" min="0" class="liga-field"></td></tr>
+                        <tr>
+                            <td colspan="3"><strong data-i18n="liga_total_pts_only">Gesamtpunkte</strong></td>
+                            <td id="liga_total_pts" class="output orange" style="text-align: right;">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="right-column">
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="liga_req_title">Beförderung: Fehlende Medaillen</div>
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="bg-lightgrey" data-i18n="liga_medal">Medaille</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t1">Heldenhafter<br>Krieger</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t2">Kriegsherr</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t3">Grosser<br>Kriegsherr</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t4">Oberster<br>Kriegsherr</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t5">Ultimativer<br>Kriegsherr</th>
+                                    <th class="bg-blue-cell" data-i18n="liga_t6">Vernichter</th>
+                                </tr>
+                                <tr>
+                                    <th class="bg-lightgrey">32.000</th>
+                                    <th class="bg-lightgrey">34.000</th>
+                                    <th class="bg-lightgrey">36.000</th>
+                                    <th class="bg-lightgrey">38.000</th>
+                                    <th class="bg-lightgrey">40.000</th>
+                                    <th class="bg-lightgrey">42.000</th>
+                                </tr>
+                            </thead>
+                            <tbody id="liga_targets_body">
+                                </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.85em; color: #7f8c8d; margin-top: 10px;" data-i18n="liga_hint">Minus (-) = Titel erreicht. <span style="color: #c0392b; font-weight: bold;">Rote Zahlen</span> = Benötigte Medaillen übersteigen die Restlänge.</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title" data-i18n="liga_rewards">Titel & Belohnungen (Referenz)</div>
+                    <div class="scrollable-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-i18n="liga_t_title">Titel</th>
+                                    <th data-i18n="liga_pts">Punkte</th>
+                                    <th data-i18n="liga_duk">Kaiserl. Dukaten</th>
+                                    <th data-i18n="liga_sce">Sceatta</th>
+                                </tr>
+                            </thead>
+                            <tbody id="liga_rewards_body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view_berimond" class="app-view">
+        <div class="grid">
+            <div class="section" style="margin-bottom: 0;">
+                <div class="section-title" data-i18n="beri_title_1">Ergebnis 1. Spieler (Eingabewerte)</div>
+                <table class="calc-table">
+                    <tr>
+                        <td data-i18n="beri_duration">Laufdauer (in Stunden)</td>
+                        <td><input type="number" id="b1_dauer" value="6.0" step="0.1" min="0" class="beri-field"></td>
                     </tr>
                     <tr>
-                        <td>Gesamt Kahnmedaillen</td>
-                        <td class="output orange"><span id="res_medaillen_ges">0</span></td>
+                        <td data-i18n="beri_chain">Kette</td>
+                        <td><input type="number" id="b1_kette" value="35" min="0" class="beri-field"></td>
                     </tr>
                     <tr>
-                        <td>Gesamt Kahntafeln</td>
-                        <td class="output yellow"><span id="res_tafeln_ges">0</span></td>
+                        <td data-i18n="beri_run_time">Laufzeit (sec.)</td>
+                        <td><input type="number" id="b1_laufzeit" value="300" min="0" class="beri-field"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_pts_def">P.p Verteidigung</td>
+                        <td><input type="number" id="b1_punkte_vert" value="11000" min="0" class="beri-field"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_safety">Sicherheit (sec.)</td>
+                        <td><input type="number" id="b1_sicherheit" value="5" min="0" class="beri-field"></td>
+                    </tr>
+                </table>
+
+                <h3 style="margin-top: 20px; font-size: 1.1em; border-bottom: 1px solid #ddd; padding-bottom: 5px;" data-i18n="beri_res_1">Ergebnisse 1. Spieler</h3>
+                <table class="calc-table">
+                    <tr>
+                        <td data-i18n="beri_chain_time">Ketten Zeit</td>
+                        <td class="output black"><span id="b1_res_ketten_zeit">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_att_ph">Angriffe pro h</td>
+                        <td class="output blue"><span id="b1_res_angriffe_ph">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_att_total">Angriffe</td>
+                        <td class="output blue"><span id="b1_res_angriffe_ges">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_points">Punkte Endstand</td>
+                        <td class="output green"><span id="b1_res_punkte">0</span></td>
                     </tr>
                 </table>
             </div>
 
-            <div class="section">
-                <div class="section-title">Werkzeug Verbrauch und Verluste</div>
-                <table>
+            <div class="section" style="margin-bottom: 0;">
+                <div class="section-title" data-i18n="beri_title_x">Ergebnis x. Spieler (Eingabewerte)</div>
+                <table class="calc-table">
                     <tr>
-                        <td>Gesamtverluste</td>
-                        <td class="output"><span id="res_verlust_ges">0</span></td>
+                        <td data-i18n="beri_players">Anzahl Spieler</td>
+                        <td><input type="number" id="bx_spieler" value="5" min="1" class="beri-field"></td>
                     </tr>
                     <tr>
-                        <td>Mauer-Werkzeuge</td>
-                        <td class="output black"><span id="res_mauer">0</span></td>
+                        <td data-i18n="beri_duration">Laufdauer (in Stunden)</td>
+                        <td><input type="number" id="bx_dauer" value="5.0" step="0.1" min="0" class="beri-field"></td>
                     </tr>
                     <tr>
-                        <td>Graben-Werkzeuge</td>
-                        <td class="output black"><span id="res_graben">0</span></td>
+                        <td data-i18n="beri_chain_avg">Kette (Durchschnitt)</td>
+                        <td><input type="number" id="bx_kette" value="30" min="0" class="beri-field"></td>
                     </tr>
                     <tr>
-                        <td>Tor-Werkzeuge</td>
-                        <td class="output black"><span id="res_tor">0</span></td>
+                        <td data-i18n="beri_run_time">Laufzeit (sec.)</td>
+                        <td><input type="number" id="bx_laufzeit" value="240" min="0" class="beri-field"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_pts_def">P.p Verteidigung</td>
+                        <td><input type="number" id="bx_punkte_vert" value="11000" min="0" class="beri-field"></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_safety">Sicherheit (sec.)</td>
+                        <td><input type="number" id="bx_sicherheit" value="5" min="0" class="beri-field"></td>
+                    </tr>
+                </table>
+
+                <h3 style="margin-top: 20px; font-size: 1.1em; border-bottom: 1px solid #ddd; padding-bottom: 5px;" data-i18n="beri_res_x">Ergebnisse Mehrere Spieler</h3>
+                <table class="calc-table">
+                    <tr>
+                        <td data-i18n="beri_chain_time">Ketten Zeit</td>
+                        <td class="output black"><span id="bx_res_ketten_zeit">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_att_sph">Angriffe pro (Sp./h)</td>
+                        <td class="output blue"><span id="bx_res_angriffe_ph">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_att_total">Angriffe</td>
+                        <td class="output blue"><span id="bx_res_angriffe_ges">0</span></td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="beri_points">Punkte Endstand</td>
+                        <td class="output green"><span id="bx_res_punkte">0</span></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="section-title">Werkzeugkosten (in Münzen)</div>
-        <table>
-            <tr>
-                <td>
-                    Mauerwerkzeug-Kosten 
-                    <select id="mauer_typ" style="margin-left: 10px;">
-                        <option value="3210">Feuerpfeile (3.210)</option>
-                        <option value="550">Wurfsteine (550)</option>
-                         <option value="0">Event Werkzeug (0)</option>
-                    </select>
-                </td>
-                <td class="output"><span id="kosten_mauer">0</span></td>
-            </tr>
-            <tr>
-                <td>
-                    Grabenwerkzeug-Kosten 
-                    <select id="graben_typ" style="margin-left: 10px;">
-                        <option value="5780">Angespitzte Pflöcke (5.780)</option>
-                        <option value="0">Event Werkzeug (0)</option>
-                    </select>
-                </td>
-                <td class="output"><span id="kosten_graben">0</span></td>
-            </tr>
-            <tr>
-                <td>
-                    Torwerkzeugkosten-Kosten 
-                    <select id="tor_typ" style="margin-left: 10px;">
-                        <option value="1720">Burgtor- Verstärkung (1.720)</option>
-                        <option value="0">Event Werkzeug (0)</option>
-                    </select>
-                </td>
-                <td class="output"><span id="kosten_tor">0</span></td>
-            </tr>
-            <tr>
-                <td><strong>Gesamtkosten</strong></td>
-                <td class="output orange"><span id="kosten_gesamt">0</span></td>
-            </tr>
-        </table>
-    </div>
 
-        <div class="disclaimer-box">
+    <div class="disclaimer-box" data-i18n="disclaimer" style="margin-top: 20px;">
         Alle Angaben sind ohne Gewähr.
     </div>
 </div>
 
 <script>
-    function refresh() {
-        // Werte auslesen
+    // Lokalisierung / Übersetzungen (Alle Rechner kombiniert)
+    const translations = {
+        de: {
+            title: "Kahnrechner, Liga & Berimond",
+            app_kahn: "Kahnrechner",
+            app_liga: "Liga Rechner",
+            app_berimond: "Berimond Rechner",
+            inputs: "Eingabewerte",
+            duration: "Dauer (in Stunden)",
+            medals: "Gewonnene Kahnmedaillen",
+            chain: "Kettenlänge",
+            tablets: "Tafeln pro Verteidigung",
+            losses_input: "Verluste",
+            sides: "Anzahl der vert. Seiten",
+            results: "Ergebnisse",
+            points: "Punkte Endstand",
+            defenses: "Anzahl der Verteidigungen",
+            coins: "Gewonnene Münzen",
+            total_medals: "Gesamt Kahnmedaillen",
+            total_tablets: "Gesamt Kahntafeln",
+            tool_usage: "Werkzeug Verbrauch und Verluste",
+            total_losses: "Gesamtverluste",
+            wall_tools: "Mauer-Werkzeuge",
+            moat_tools: "Graben-Werkzeuge",
+            gate_tools: "Tor-Werkzeuge",
+            tool_costs: "Werkzeugkosten (in Münzen)",
+            wall_costs: "Mauerwerkzeug-Kosten",
+            fire_arrows: "Feuerpfeile (3.210)",
+            stones: "Wurfsteine (550)",
+            event_tool: "Event Werkzeug (0)",
+            moat_costs: "Grabenwerkzeug-Kosten",
+            stakes: "Angespitzte Pflöcke (5.780)",
+            gate_costs: "Torwerkzeugkosten-Kosten",
+            gate_reinf: "Burgtor- Verstärkung (1.720)",
+            total_costs_label: "Gesamtkosten",
+            table_title: "Ohne Eventwerkzeug nur Graben (Mitte + Flanke)",
+            expert: "Experte",
+            expert_plus: "Experte +",
+            master: "Meister",
+            master_plus: "Meister +",
+            grandmaster: "Erzmeister",
+            khandef: "Kahndeff Verluste",
+            metdef: "Metdeff Verluste",
+            disclaimer: "Alle Angaben sind ohne Gewähr.",
+            
+            // Liga Rechner Spezifisch
+            liga_inputs_title: "Liga Eingabewerte",
+            liga_length: "Liga Länge",
+            liga_rest: "Restlänge",
+            liga_notplayed: "Nicht gespielt",
+            liga_medals_title: "Medaillen & Punkte",
+            liga_medal: "Medaille",
+            liga_pts: "Punkte",
+            liga_amount: "Anzahl",
+            liga_gold: "Gold",
+            liga_silver: "Silber",
+            liga_bronze: "Bronze",
+            liga_glass: "Glass",
+            liga_copper: "Kupfer",
+            liga_stone: "Stein",
+            liga_wood: "Holz",
+            liga_total_pts_only: "Gesamtpunkte",
+            liga_req_title: "Beförderung: Fehlende Medaillen",
+            liga_hint: "Minus (-) = Titel erreicht. <span style=\"color: #c0392b; font-weight: bold;\">Rote Zahlen</span> = Benötigte Medaillen übersteigen die Restlänge.",
+            liga_rewards: "Titel & Belohnungen (Referenz)",
+            liga_t_title: "Titel",
+            liga_duk: "Kaiserl. Dukaten",
+            liga_sce: "Sceatta",
+            liga_t1: "Heldenhafter Krieger",
+            liga_t2: "Kriegsherr",
+            liga_t3: "Grosser Kriegsherr",
+            liga_t4: "Oberster Kriegsherr",
+            liga_t5: "Ultimativer Kriegsherr",
+            liga_t6: "Vernichter",
+            
+            // Berimond Rechner Spezifisch
+            beri_title_1: "Ergebnis 1. Spieler (Eingabewerte)",
+            beri_res_1: "Ergebnisse 1. Spieler",
+            beri_title_x: "Ergebnis x. Spieler (Eingabewerte)",
+            beri_res_x: "Ergebnisse Mehrere Spieler",
+            beri_duration: "Laufdauer (in h)",
+            beri_chain: "Kette",
+            beri_chain_avg: "Kette (Durchschnitt)",
+            beri_run_time: "Laufzeit (sec.)",
+            beri_pts_def: "P.p Verteidigung",
+            beri_safety: "Sicherheit (sec.)",
+            beri_players: "Anzahl Spieler",
+            beri_chain_time: "Ketten Zeit",
+            beri_att_ph: "Angriffe pro h",
+            beri_att_sph: "Angriffe pro (Sp./h)",
+            beri_att_total: "Angriffe",
+            beri_points: "Punkte Endstand"
+        },
+        en: {
+            title: "Khan, League & Berimond Calculator",
+            app_kahn: "Khan Calculator",
+            app_liga: "League Calculator",
+            app_berimond: "Berimond Calculator",
+            inputs: "Input Values",
+            duration: "Duration (in hours)",
+            medals: "Earned Khan Medals",
+            chain: "Chain Length",
+            tablets: "Tablets per Defense",
+            losses_input: "Losses",
+            sides: "Number of Defended Sides",
+            results: "Results",
+            points: "Final Score",
+            defenses: "Number of Defenses",
+            coins: "Earned Coins",
+            total_medals: "Total Khan Medals",
+            total_tablets: "Total Khan Tablets",
+            tool_usage: "Tool Consumption and Losses",
+            total_losses: "Total Losses",
+            wall_tools: "Wall Tools",
+            moat_tools: "Moat Tools",
+            gate_tools: "Gate Tools",
+            tool_costs: "Tool Costs (in Coins)",
+            wall_costs: "Wall Tool Costs",
+            fire_arrows: "Fire Arrows (3,210)",
+            stones: "Throwing Stones (550)",
+            event_tool: "Event Tool (0)",
+            moat_costs: "Moat Tool Costs",
+            stakes: "Sharpened Stakes (5,780)",
+            gate_costs: "Gate Tool Costs",
+            gate_reinf: "Castle Gate Reinforcement (1,720)",
+            total_costs_label: "Total Costs",
+            table_title: "Without Event Tools only Moat (Center + Flank)",
+            expert: "Expert",
+            expert_plus: "Expert +",
+            master: "Master",
+            master_plus: "Master +",
+            grandmaster: "Grandmaster",
+            khandef: "Khan Def Losses",
+            metdef: "Mead Def Losses",
+            disclaimer: "All information is without guarantee.",
+            
+            // Liga Rechner Spezifisch
+            liga_inputs_title: "League Inputs",
+            liga_length: "League Length",
+            liga_rest: "Remaining Length",
+            liga_notplayed: "Not Played",
+            liga_medals_title: "Medals & Points",
+            liga_medal: "Medal",
+            liga_pts: "Points",
+            liga_amount: "Amount",
+            liga_gold: "Gold",
+            liga_silver: "Silver",
+            liga_bronze: "Bronze",
+            liga_glass: "Glass",
+            liga_copper: "Copper",
+            liga_stone: "Stone",
+            liga_wood: "Wood",
+            liga_total_pts_only: "Total Points",
+            liga_req_title: "Promotion: Missing Medals",
+            liga_hint: "Minus (-) = Title reached. <span style=\"color: #c0392b; font-weight: bold;\">Red numbers</span> = Required medals exceed remaining length.",
+            liga_rewards: "Titles & Rewards (Reference)",
+            liga_t_title: "Title",
+            liga_duk: "Imperial Ducats",
+            liga_sce: "Sceatta",
+            liga_t1: "Heroic Warrior",
+            liga_t2: "Warlord",
+            liga_t3: "Great Warlord",
+            liga_t4: "Supreme Warlord",
+            liga_t5: "Ultimate Warlord",
+            liga_t6: "Annihilator",
+            
+            // Berimond Rechner Spezifisch
+            beri_title_1: "Result 1st Player (Inputs)",
+            beri_res_1: "Results 1st Player",
+            beri_title_x: "Result x. Players (Inputs)",
+            beri_res_x: "Results Multiple Players",
+            beri_duration: "Duration (in h)",
+            beri_chain: "Chain",
+            beri_chain_avg: "Chain (Average)",
+            beri_run_time: "Runtime (sec.)",
+            beri_pts_def: "Pts per Defense",
+            beri_safety: "Safety (sec.)",
+            beri_players: "Number of Players",
+            beri_chain_time: "Chain Time",
+            beri_att_ph: "Attacks per h",
+            beri_att_sph: "Attacks per (Pl./h)",
+            beri_att_total: "Attacks",
+            beri_points: "Final Score"
+        }
+    };
+
+    let currentLocale = 'de-DE';
+    let currentLangCode = 'de';
+
+    // Konstanten für den Ligarechner
+    const LIGA_PTS_MAP = [1000, 950, 850, 700, 500, 300, 100];
+    const LIGA_MEDAL_KEYS = ['liga_gold', 'liga_silver', 'liga_bronze', 'liga_glass', 'liga_copper', 'liga_stone', 'liga_wood'];
+    const LIGA_TARGETS = [32000, 34000, 36000, 38000, 40000, 42000];
+    const LIGA_TITLES = [
+        ["Streiter", 2000, "", 50], ["Wilder Streiter", 4000, "", 50], ["Geschickter Streiter", 6000, "", 50],
+        ["Talentierter Streiter", 8000, 50, 50], ["Jäger", 10000, "", 50], ["Kopfgeldjäger", 12000, "", 50],
+        ["Erfahrener Jäger", 14000, "", 50], ["Meisterhafter Jäger", 16000, 50, 50], ["Wächter", 18000, "", 50],
+        ["Burgwächter", 20000, "", 50], ["Edler Wächter", 22000, "", 50], ["Thronwächter", 24000, 50, 50],
+        ["Krieger", 26000, "", 50], ["Edler Krieger", 28000, "", 50], ["Erfahrener Krieger", 30000, "", 50],
+        ["Heldenhafter Krieger", 32000, 50, 50], ["Kriegsherr", 34000, "", 50], ["Grosser Kriegsherr", 36000, "", 50],
+        ["Oberster Kriegsherr", 38000, "", 50], ["Ultimativer Kriegsherr", 40000, 50, 50], ["Vernichter", 42000, "", 50]
+    ];
+
+    // Funktion zum Wechseln der Sprache
+    function setLanguage(lang) {
+        currentLocale = lang === 'en' ? 'en-US' : 'de-DE';
+        currentLangCode = lang;
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                el.innerHTML = translations[lang][key]; 
+            }
+        });
+        
+        // Main Titel updaten
+        let selApp = document.getElementById('appSelect').value;
+        if(selApp === 'kahn') document.getElementById('main_title').innerText = translations[lang]['app_kahn'];
+        if(selApp === 'liga') document.getElementById('main_title').innerText = translations[lang]['app_liga'];
+        if(selApp === 'berimond') document.getElementById('main_title').innerText = translations[lang]['app_berimond'];
+
+        buildLigaTables();
+        refreshKahn();
+        refreshLiga();
+        refreshBerimond();
+    }
+
+    // Event-Listener für App-Auswahl (Navigation)
+    document.getElementById('appSelect').addEventListener('change', function(e) {
+        // Views toggeln
+        document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+        document.getElementById('view_' + e.target.value).classList.add('active');
+
+        // Main Title updaten
+        document.getElementById('main_title').innerText = translations[currentLangCode]['app_' + e.target.value];
+    });
+
+    document.getElementById('languageSelect').addEventListener('change', function(e) {
+        setLanguage(e.target.value);
+    });
+
+    // ----------------------------------------------------
+    // KAHNRECHNER LOGIK
+    // ----------------------------------------------------
+    function refreshKahn() {
         let dauer = parseFloat(document.getElementById('dauer').value) || 0;
         let medaillen = parseFloat(document.getElementById('medaillen').value) || 0;
         let kettenlaenge = parseFloat(document.getElementById('kettenlaenge').value) || 0;
@@ -259,30 +859,16 @@
         let verlusteProVert = parseFloat(document.getElementById('verluste').value) || 0;
         let seiten = parseFloat(document.getElementById('seiten').value) || 0;
 
-        // 1. Punkte berechnen
         let punkte = medaillen * 7 * kettenlaenge * dauer * 9.02;
-
-        // 2. Anzahl der Verteidigungen berechnen (Runden)
-        let verteidigungen = 0;
-        if (medaillen > 0) {
-            verteidigungen = Math.round(punkte / (medaillen * 7)); 
-        }
-
-        // 3. Gesamt Kahnmedaillen berechnen
+        let verteidigungen = medaillen > 0 ? Math.round(punkte / (medaillen * 7)) : 0;
         let medaillenGesamt = medaillen * verteidigungen;
-
-        // 4. Kahntafeln Gesamt berechnen
         let tafelnGesamt = verteidigungen * tafelnProVert;
-
-        // 5. Gesamtverluste berechnen
         let verlustGesamt = verteidigungen * verlusteProVert;
 
-        // 6. Werkzeuge berechnen
         let mauerWerkzeuge = Math.round(seiten * 48.8 * verteidigungen);
         let grabenWerkzeuge = Math.round(seiten * 11.2 * verteidigungen);
         let torWerkzeuge = Math.round(22.6 * verteidigungen);
 
-        // 7. Werkzeugkosten berechnen
         let mauerKostenTyp = parseInt(document.getElementById('mauer_typ').value) || 0;
         let grabenKostenTyp = parseInt(document.getElementById('graben_typ').value) || 0;
         let torKostenTyp = parseInt(document.getElementById('tor_typ').value) || 0;
@@ -291,47 +877,144 @@
         let kostenGraben = grabenWerkzeuge * grabenKostenTyp;
         let kostenTor = torWerkzeuge * torKostenTyp;
         let kostenGesamt = kostenMauer + kostenGraben + kostenTor;
-
-        // 8. Gewonnene Münzen berechnen
         let muenzenGewonnen = verteidigungen * 30000;
 
-        // Anzeige formatieren (Bisherige Werte)
-        document.getElementById('res_punkte').innerText = punkte.toLocaleString('de-DE', {
-            minimumFractionDigits: 0, 
-            maximumFractionDigits: 0
-        });
-        
-        document.getElementById('res_vert').innerText = verteidigungen.toLocaleString('de-DE');
-        document.getElementById('res_medaillen_ges').innerText = medaillenGesamt.toLocaleString('de-DE');
-        document.getElementById('res_tafeln_ges').innerText = tafelnGesamt.toLocaleString('de-DE');
-        document.getElementById('res_verlust_ges').innerText = verlustGesamt.toLocaleString('de-DE');
-        
-        document.getElementById('res_mauer').innerText = mauerWerkzeuge.toLocaleString('de-DE');
-        document.getElementById('res_graben').innerText = grabenWerkzeuge.toLocaleString('de-DE');
-        document.getElementById('res_tor').innerText = torWerkzeuge.toLocaleString('de-DE');
-
-        // Anzeige gewonnene Münzen
-        document.getElementById('res_muenzen_gew').innerText = muenzenGewonnen.toLocaleString('de-DE');
-
-        // Anzeige formatieren (Kosten)
-        document.getElementById('kosten_mauer').innerText = kostenMauer.toLocaleString('de-DE');
-        document.getElementById('kosten_graben').innerText = kostenGraben.toLocaleString('de-DE');
-        document.getElementById('kosten_tor').innerText = kostenTor.toLocaleString('de-DE');
-        document.getElementById('kosten_gesamt').innerText = kostenGesamt.toLocaleString('de-DE');
+        document.getElementById('res_punkte').innerText = punkte.toLocaleString(currentLocale, { maximumFractionDigits: 0 });
+        document.getElementById('res_vert').innerText = verteidigungen.toLocaleString(currentLocale);
+        document.getElementById('res_medaillen_ges').innerText = medaillenGesamt.toLocaleString(currentLocale);
+        document.getElementById('res_tafeln_ges').innerText = tafelnGesamt.toLocaleString(currentLocale);
+        document.getElementById('res_verlust_ges').innerText = verlustGesamt.toLocaleString(currentLocale);
+        document.getElementById('res_mauer').innerText = mauerWerkzeuge.toLocaleString(currentLocale);
+        document.getElementById('res_graben').innerText = grabenWerkzeuge.toLocaleString(currentLocale);
+        document.getElementById('res_tor').innerText = torWerkzeuge.toLocaleString(currentLocale);
+        document.getElementById('res_muenzen_gew').innerText = muenzenGewonnen.toLocaleString(currentLocale);
+        document.getElementById('kosten_mauer').innerText = kostenMauer.toLocaleString(currentLocale);
+        document.getElementById('kosten_graben').innerText = kostenGraben.toLocaleString(currentLocale);
+        document.getElementById('kosten_tor').innerText = kostenTor.toLocaleString(currentLocale);
+        document.getElementById('kosten_gesamt').innerText = kostenGesamt.toLocaleString(currentLocale);
     }
 
-    // Event-Listener für Eingabefelder
-    document.querySelectorAll('input').forEach(input => {
-        input.addEventListener('input', refresh);
-    });
+    // ----------------------------------------------------
+    // LIGA RECHNER LOGIK
+    // ----------------------------------------------------
+    function buildLigaTables() {
+        let tbody = document.getElementById('liga_targets_body');
+        tbody.innerHTML = '';
+        for (let i = 0; i < LIGA_PTS_MAP.length; i++) {
+            let tr = document.createElement('tr');
+            let tdName = document.createElement('td');
+            tdName.className = "bg-lightgrey";
+            tdName.innerText = translations[currentLangCode][LIGA_MEDAL_KEYS[i]];
+            tr.appendChild(tdName);
 
-    // Event-Listener für Dropdown-Menüs
-    document.getElementById('mauer_typ').addEventListener('change', refresh);
-    document.getElementById('graben_typ').addEventListener('change', refresh);
-    document.getElementById('tor_typ').addEventListener('change', refresh);
+            for (let t = 0; t < LIGA_TARGETS.length; t++) {
+                let tdVal = document.createElement('td');
+                tdVal.id = 'l_req_' + i + '_' + t;
+                tr.appendChild(tdVal);
+            }
+            tbody.appendChild(tr);
+        }
 
-    // Initialer Aufruf
-    refresh();
+        let rBody = document.getElementById('liga_rewards_body');
+        rBody.innerHTML = '';
+        LIGA_TITLES.forEach(titleData => {
+            let tr = document.createElement('tr');
+            let name = titleData[0]; 
+            tr.innerHTML = `
+                <td>${name}</td>
+                <td>${titleData[1].toLocaleString(currentLocale)}</td>
+                <td>${titleData[2]}</td>
+                <td>${titleData[3]}</td>
+            `;
+            rBody.appendChild(tr);
+        });
+    }
+
+    function refreshLiga() {
+        let totalPts = 2000;
+        let restlaenge = parseFloat(document.getElementById('liga_rest').value) || 0;
+
+        for (let i = 0; i < LIGA_PTS_MAP.length; i++) {
+            let anz = parseFloat(document.getElementById('l_anz_' + i).value) || 0;
+            let sum = anz * LIGA_PTS_MAP[i];
+            totalPts += sum;
+        }
+
+        document.getElementById('liga_total_pts').innerText = totalPts.toLocaleString(currentLocale);
+
+        for (let t = 0; t < LIGA_TARGETS.length; t++) {
+            let neededPts = LIGA_TARGETS[t] - totalPts;
+
+            for (let p = 0; p < LIGA_PTS_MAP.length; p++) {
+                let cell = document.getElementById('l_req_' + p + '_' + t);
+                if (neededPts <= 0) {
+                    cell.innerText = "-";
+                    cell.style.color = "#27ae60"; 
+                    cell.style.fontWeight = "bold";
+                } else {
+                    let reqMedals = neededPts / LIGA_PTS_MAP[p];
+                    cell.innerText = reqMedals.toLocaleString(currentLocale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+                    
+                    if (reqMedals > restlaenge) {
+                        cell.style.color = "#c0392b"; 
+                        cell.style.fontWeight = "bold";
+                    } else {
+                        cell.style.color = "#333";
+                        cell.style.fontWeight = "normal";
+                    }
+                }
+            }
+        }
+    }
+
+    // ----------------------------------------------------
+    // BERIMOND RECHNER LOGIK
+    // ----------------------------------------------------
+    function refreshBerimond() {
+        let b1_dauer = parseFloat(document.getElementById('b1_dauer').value) || 0;
+        let b1_kette = parseFloat(document.getElementById('b1_kette').value) || 0;
+        let b1_laufzeit = parseFloat(document.getElementById('b1_laufzeit').value) || 0;
+        let b1_punkte_vert = parseFloat(document.getElementById('b1_punkte_vert').value) || 0;
+        let b1_sicherheit = parseFloat(document.getElementById('b1_sicherheit').value) || 0;
+
+        let b1_ketten_zeit = b1_laufzeit + (b1_kette * b1_sicherheit);
+        let b1_angriffe_ph = b1_ketten_zeit > 0 ? (3600 / b1_ketten_zeit) * b1_kette : 0;
+        let b1_angriffe_ges = b1_angriffe_ph * b1_dauer;
+        let b1_punkte = b1_angriffe_ges * b1_punkte_vert;
+
+        document.getElementById('b1_res_ketten_zeit').innerText = b1_ketten_zeit.toLocaleString(currentLocale);
+        document.getElementById('b1_res_angriffe_ph').innerText = b1_angriffe_ph.toLocaleString(currentLocale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+        document.getElementById('b1_res_angriffe_ges').innerText = b1_angriffe_ges.toLocaleString(currentLocale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+        document.getElementById('b1_res_punkte').innerText = Math.round(b1_punkte).toLocaleString(currentLocale);
+
+        let bx_spieler = parseFloat(document.getElementById('bx_spieler').value) || 0;
+        let bx_dauer = parseFloat(document.getElementById('bx_dauer').value) || 0;
+        let bx_kette = parseFloat(document.getElementById('bx_kette').value) || 0;
+        let bx_laufzeit = parseFloat(document.getElementById('bx_laufzeit').value) || 0;
+        let bx_punkte_vert = parseFloat(document.getElementById('bx_punkte_vert').value) || 0;
+        let bx_sicherheit = parseFloat(document.getElementById('bx_sicherheit').value) || 0;
+
+        let bx_ketten_zeit = bx_laufzeit + (bx_kette * bx_sicherheit);
+        let bx_angriffe_ph = bx_ketten_zeit > 0 ? (3600 / bx_ketten_zeit) * bx_kette : 0;
+        let bx_angriffe_ges = bx_angriffe_ph * bx_dauer * bx_spieler;
+        let bx_punkte = bx_angriffe_ges * bx_punkte_vert;
+
+        document.getElementById('bx_res_ketten_zeit').innerText = bx_ketten_zeit.toLocaleString(currentLocale);
+        document.getElementById('bx_res_angriffe_ph').innerText = bx_angriffe_ph.toLocaleString(currentLocale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+        document.getElementById('bx_res_angriffe_ges').innerText = bx_angriffe_ges.toLocaleString(currentLocale, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+        document.getElementById('bx_res_punkte').innerText = Math.round(bx_punkte).toLocaleString(currentLocale);
+    }
+
+    // Event-Listener Zuweisungen
+    document.querySelectorAll('#view_kahn input, #view_kahn select').forEach(el => el.addEventListener('input', refreshKahn));
+    document.querySelectorAll('.liga-field').forEach(el => el.addEventListener('input', refreshLiga));
+    document.querySelectorAll('.beri-field').forEach(el => el.addEventListener('input', refreshBerimond));
+
+    // Initialisierung
+    buildLigaTables();
+    refreshKahn();
+    refreshLiga();
+    refreshBerimond();
 </script>
 
 </body>

@@ -276,7 +276,7 @@
                     <option value="kahn" data-i18n="app_kahn">Kahnrechner</option>
                     <option value="liga" data-i18n="app_liga">Liga Rechner</option>
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
-                    <option value="berater">Berater Rechner</option>
+                    <option value="berater" data-i18n="app_berater">Berater Rechner</option>
                     <option value="changelog" data-i18n="app_changelog">Changelog</option>
                 </select>
             </div>
@@ -382,8 +382,8 @@
                     <td>
                         <span data-i18n="wall_costs">Mauerwerkzeug-Kosten</span> 
                         <select id="mauer_typ" class="tool-select" style="margin-left: 10px;">
-                             <option value="550" data-i18n="stones">Wurfsteine (550)</option>
-                                <option value="3210" data-i18n="fire_arrows">Feuerpfeile (3.210)</option>
+                            <option value="3210" data-i18n="fire_arrows">Feuerpfeile (3.210)</option>
+                            <option value="550" data-i18n="stones">Wurfsteine (550)</option>
                              <option value="0" data-i18n="event_tool">Event Werkzeug (0)</option>
                         </select>
                     </td>
@@ -420,13 +420,14 @@
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th colspan="7" style="font-size: 1.2em; font-weight: bold; background-color: #fff; border-bottom: 2px solid #000;" data-i18n="table_title">
+                        <th colspan="8" style="font-size: 1.2em; font-weight: bold; background-color: #fff; border-bottom: 2px solid #000;" data-i18n="table_title">
                             Ohne Eventwerkzeug nur Graben (Mitte + Flanke)
                         </th>
                     </tr>
                     <tr>
                         <th class="bg-lightgrey"></th>
                         <th class="bg-lightgrey"></th>
+                        <th class="bg-lightgrey"></th> 
                         <th class="bg-orange-cell" data-i18n="expert">Experte</th>
                         <th class="bg-blue-cell" data-i18n="expert_plus">Experte +</th>
                         <th class="bg-green-cell" data-i18n="master">Meister</th>
@@ -435,23 +436,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-orange-cell"></td><td class="bg-blue-cell">5.150</td><td class="bg-green-cell"></td><td class="bg-purple-cell">9.500</td><td class="bg-pink-cell"></td></tr>
-                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">500%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">30.000</td><td class="bg-pink-cell"></td></tr>
-                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">600%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">35.000</td><td class="bg-pink-cell"></td></tr>
-                    <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">800%</td><td class="bg-orange-cell">27.500</td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">45.000</td><td class="bg-pink-cell"></td></tr>
-                    <tr><td class="bg-lightgrey">30€</td><td class="bg-lightgrey">1000%</td><td class="bg-orange-cell">29.000</td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">55.000</td><td class="bg-pink-cell">75.000</td></tr>
-                    <tr><td class="bg-lightgrey">50€</td><td class="bg-lightgrey">1400%</td><td class="bg-orange-cell">48.000</td><td class="bg-blue-cell">51.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">70.000</td><td class="bg-pink-cell">102.000</td></tr>
-                    <tr><td class="bg-lightgrey">100€</td><td class="bg-lightgrey">1700%</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell"></td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-lightgrey">infinty</td><td class="bg-orange-cell"></td><td class="bg-blue-cell">5.150</td><td class="bg-green-cell"></td><td class="bg-purple-cell">9.500</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">500%</td><td class="bg-lightgrey">1h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">30.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">600%</td><td class="bg-lightgrey">2h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">35.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">800%</td><td class="bg-lightgrey">3h</td><td class="bg-orange-cell">27.500</td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">45.000</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">30€</td><td class="bg-lightgrey">1000%</td><td class="bg-lightgrey">4h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">55.000</td><td class="bg-pink-cell">75.000</td></tr>
+                    <tr><td class="bg-lightgrey">50€</td><td class="bg-lightgrey">1400%</td><td class="bg-lightgrey">5h</td><td class="bg-orange-cell">48.000</td><td class="bg-blue-cell">51.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">70.000</td><td class="bg-pink-cell">102.000</td></tr>
+                    <tr><td class="bg-lightgrey">100€</td><td class="bg-lightgrey">1700%</td><td class="bg-lightgrey">6h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell"></td><td class="bg-pink-cell"></td></tr>
                     
-                    <tr><td colspan="7" class="bg-darkgrey"></td></tr>
+                    <tr><td colspan="8" class="bg-darkgrey"></td></tr>
 
                     <tr>
-                        <td colspan="2" class="bg-lightgrey" style="text-align: left;" data-i18n="khandef">Kahndeff Verluste</td>
+                        <td colspan="3" class="bg-lightgrey" style="text-align: left;" data-i18n="khandef">Kahndeff Verluste</td>
                         <td class="bg-orange-cell">200</td><td class="bg-blue-cell">240</td><td class="bg-green-cell">1.000</td><td class="bg-purple-cell">1.500</td><td class="bg-pink-cell">2.500</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="bg-lightgrey" style="text-align: left;" data-i18n="metdef">Metdeff Verluste</td>
-                        <td class="bg-orange-cell">120</td><td class="bg-blue-cell">140</td><td class="bg-green-cell"></td><td class="bg-purple-cell">700</td><td class="bg-pink-cell">1.000</td>
+                        <td colspan="3" class="bg-lightgrey" style="text-align: left;" data-i18n="metdef">Metdeff Verluste</td>
+                        <td class="bg-orange-cell"></td><td class="bg-blue-cell">140</td><td class="bg-green-cell"></td><td class="bg-purple-cell">700</td><td class="bg-pink-cell">1.000</td>
                     </tr>
                 </tbody>
             </table>
@@ -654,7 +655,6 @@
             </div>
         </div>
     </div>
-
     
     <div id="view_berater" class="app-view">
         <div class="grid">
@@ -707,7 +707,15 @@
             <div class="section-title" data-i18n="app_changelog">Changelog</div>
             
             <div class="changelog-entry">
-                <div class="changelog-date" data-i18n="cl_v1_2_date">Version 1.2 - Aktuell</div>
+                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.3 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_3_desc">
+                    <li>Fixed text "beim Berater"</li>
+                    <li>Hinzufügen von der Booster dauer</li>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_2_date">Version 1.2</div>
                 <ul class="changelog-list" data-i18n="cl_v1_2_desc">
                     <li>Hinzufügen des Berimond Rechners.</li>
                     <li>Gleichzeitige Berechnung für Einzelspieler und Gruppen.</li>
@@ -771,6 +779,7 @@
             app_kahn: "Kahnrechner",
             app_liga: "Liga Rechner",
             app_berimond: "Berimond Rechner",
+            app_berater: "Berater Rechner",
             app_changelog: "Changelog",
             app_about: "Über das Tool",
             btn_about: "Über",
@@ -861,7 +870,8 @@
             beri_points: "Punkte Endstand",
 
             // Changelog
-            cl_v1_2_date: "Version 1.2 - Aktuell",
+            cl_v1_3_date: "Version 1.3 - Aktuell",
+            cl_v1_2_date: "Version 1.2",
             cl_v1_2_desc: "<li>Hinzufügen des Berimond Rechners.</li><li>Gleichzeitige Berechnung für Einzelspieler und Gruppen.</li><li>Neue Navigation und Dropdown für die App-Auswahl integriert.</li><li>Hinzufügen dieses Changelogs.</li>",
             cl_v1_1_date: "Version 1.1",
             cl_v1_1_desc: "<li>Neuer Liga Rechner hinzugefügt.</li><li>Basiswert von 2.000 Punkten im Liga Rechner integriert.</li><li>Rote Markierung eingefügt für Titel, deren benötigte Medaillen die Restlänge übersteigen.</li><li>Referenz-Tabelle für Liga-Titel und Belohnungen eingebaut.</li>",
@@ -879,6 +889,7 @@
             app_kahn: "Khan Calculator",
             app_liga: "League Calculator",
             app_berimond: "Berimond Calculator",
+            app_berater: "advisitor Calculator",
             app_changelog: "Changelog",
             app_about: "About the Tool",
             btn_about: "About",
@@ -969,7 +980,8 @@
             beri_points: "Final Score",
 
             // Changelog
-            cl_v1_2_date: "Version 1.2 - Current",
+            cl_v1_2_date: "Version 1.3 - Current",
+            cl_v1_2_date: "Version 1.2",
             cl_v1_2_desc: "<li>Added the Berimond Calculator.</li><li>Simultaneous calculation for single players and groups.</li><li>Integrated new navigation and dropdown for app selection.</li><li>Added this changelog.</li>",
             cl_v1_1_date: "Version 1.1",
             cl_v1_1_desc: "<li>Added new League Calculator.</li><li>Integrated base value of 2,000 points in League Calculator.</li><li>Added red highlights for titles where required medals exceed remaining length.</li><li>Added reference table for League titles and rewards.</li>",

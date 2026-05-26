@@ -692,6 +692,31 @@
                 </table>
             </div>
         </div>
+        <div class="section data-table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th colspan="8" style="font-size: 1.2em; font-weight: bold; background-color: #fff; border-bottom: 2px solid #000;" data-i18n="table_title_nomad_advisitor">
+                            Beispiel Werte Berimond
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="bg-lightgrey" data-i18n="Preis">Preis</th>
+                        <th class="bg-lightgrey" data-i18n="Faktor">%</th>
+                        <th class="bg-lightgrey" data-i18n="Zeit">Dauer</th> 
+                        <th class="bg-green-cell" data-i18n="tower">Turm</th>
+                        <th class="bg-purple-cell" data-i18n="Defense_B">Verteidigung</th>
+                        <th class="bg-pink-cell" data-i18n="attack_pl">Angriff Spieler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-lightgrey">-</td><td class="bg-green-cell">450</td><td class="bg-purple-cell">-</td><td class="bg-pink-cell">-</td></tr>
+                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">300%</td><td class="bg-lightgrey">240min</td><td class="bg-green-cell">-</td><td class="bg-purple-cell">9.000</td><td class="bg-pink-cell">-</td></tr>
+                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">400%</td><td class="bg-lightgrey">360min</td></td></td><td class="bg-green-cell">2.200</td><td class="bg-purple-cell">11.000</td><td class="bg-pink-cell">900</td></tr>
+                
+                </tbody>
+            </table>
+        </div>
     </div>
     
     <div id="view_berater" class="app-view">
@@ -797,7 +822,16 @@
             <div class="section-title" data-i18n="app_changelog">Changelog</div>
             
             <div class="changelog-entry">
-                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.4 - Aktuell</div>
+                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.41 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_3_desc">
+                    <li>Beispieltabelle Berimond</li>
+                    <li>Disclaimer Box erweitert</li>
+                    <li>In "über das Tool" einen Text "Wichtig" erstellt</li>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.4  </div>
                 <ul class="changelog-list" data-i18n="cl_v1_3_desc">
                     <li>Beispielpunkte beim Berater hinzugefügt</li>
                     <li>Bug fixes</li>
@@ -853,6 +887,12 @@
             <p data-i18n="about_text_2" style="line-height: 1.6; color: #444; margin-bottom: 20px;">
                 Durch das Ausfüllen der gelb markierten Felder können schnell Ausbeute, benötigte Werkzeuge, Kostenpunkte sowie Laufzeiten und Medaillen-Ziele berechnet werden.
             </p>
+            <p data-i18n="about_text_2" style="line-height: 1.6; color: #ff0000; margin-bottom: 20px;">
+               <strong>Wichtig!</strong> 
+            </p>
+            <p data-i18n="about_text_2" style="line-height: 1.6; color: #ff0000; margin-bottom: 20px;">
+               <strong>Alle Werte in den Tabellen wurden zuvor bei 10 Angriffen getestet und Vermittelt. Hierbei kann es von Spieler zu Spieler zu unterschiede kommen. Die Werte kann man als Anhaltspunkt für Berrechnungen nehmen, um ein genaues Ergebnis zu erhalten muss zuvor ein/ mehrere Angriff/ Angriffe getätigt werden</strong> 
+            </p>
            
             <div class="highlight-box">
                 <p data-i18n="about_text_3" style="margin: 0 0 10px 0;">
@@ -866,7 +906,7 @@
     </div>
 
     <div class="disclaimer-box" data-i18n="disclaimer" style="margin-top: 20px;">
-        Alle Angaben sind ohne Gewähr.
+        Alle Angaben sind ohne Gewähr. Die Werte der Tabelle sind nicht zu 100% korrekt (Mehr infos in (über))
     </div>
 </div>
 
@@ -922,6 +962,9 @@
             zeit: "zeit",
             faktor: "faktor",
             preis: "preis",
+            tower: "turm",
+            Defense_B: "Verteidigung",
+            attack_p1: "Angriff Spieler",
             table_title_nomad_advisitor: "Kombi Angebote Nomaden",
             table_title_samu_advisitor: "Kombi Angebote Samurai",
             disclaimer: "Alle Angaben sind ohne Gewähr.",
@@ -1037,6 +1080,9 @@
             zeit: "time",
             faktor: "factor",
             preis: "price",
+            tower: "tower",
+            Defense_B: "Defense",
+            attack_p1: "Attack Player",
             table_title_nomad_advisitor: "Nomad Combo Offers",
             table_title_samu_advisitor: "Samurai Combo Offers",
             disclaimer: "All information is without guarantee.",

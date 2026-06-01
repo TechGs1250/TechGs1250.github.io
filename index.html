@@ -278,6 +278,8 @@
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
                     <option value="berater" data-i18n="app_berater">Berater Rechner</option>
                     <option value="changelog" data-i18n="app_changelog">Changelog</option>
+                    <option value="links"   data-i18n="app_links">Links</option>
+                    <option value="Hilfe"   data-i18n="app_links">Hilfe</option>
                 </select>
             </div>
 
@@ -822,7 +824,15 @@
             <div class="section-title" data-i18n="app_changelog">Changelog</div>
             
             <div class="changelog-entry">
-                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.41 - Aktuell</div>
+                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.5 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_4_desc">
+                    <li>Eine Seite für Hilfreiche Links erstellt</li>
+                </ul>
+            </div>
+
+            
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_3_date">Version 1.41</div>
                 <ul class="changelog-list" data-i18n="cl_v1_3_desc">
                     <li>Beispieltabelle Berimond</li>
                     <li>Disclaimer Box erweitert</li>
@@ -878,6 +888,49 @@
         </div>
     </div>
 
+    <div id="view_links" class="app-view">
+        <div class="section">
+            <div class="section-title" data-i18n="app_links">Links</div>
+            
+            <div class="changelog-entry">
+                <div class="link-date" data-i18n="Empire Rankings"><strong>Empire Rankings</strong></div>
+                <ul class="link-list" data-i18n="cl_v1_3_desc">
+                    <a href="https://danadum.github.io/empire-rankings/" target="_blank">Empire Rankings</a>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="link-date" data-i18n="Goodgame Empire Tracker"><strong>Goodgame Empire Tracker (GGE Tracker)</strong></div>
+                <ul class="link-list" data-i18n="cl_v1_3_desc">
+                   <a href="https://gge-tracker.com/players" target="_blank">GGE Tracker</a>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="link-date" data-i18n="Generals Forum"><strong>Generals Forum</strong></div>
+                <ul class="link-list" data-i18n="cl_v1_3_desc">
+                    <a href="https://generalscamp.github.io/forum/" target="_blank">Generals Forum</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+.
+    <div id="view_Hilfe" class="app-view">
+        <div class="section">
+            <div class="section-title" data-i18n="app_Hilfe">Hilfe</div>
+            
+            <div class="changelog-entry">
+                <div class="hilfe-date" data-i18n="Empire Rankings"><strong>Kahnrechner</strong></div>
+                <ul class="hilfe-list" data-i18n="cl_v1_3_desc">
+                    <strong>Wie bediene ich den Rechner?</strong>
+                        <li>Fülle bei den "Eingabewerte" alles aus, einige Werte kannst du aus der unterliegenden Tabelle entnehmen</li>
+                        <li>Bei den Erbenissen steht der womögliche Punktestand/Erspielte Kahnmedaillen/ Erspielte Kahntafeln/ etc.</li>
+                        <li>Bei "Werkzeugkosten (in Münzen)" kann man sich ausrechnen lassen, wenn man kein Eventwerkzeug verwenden möchte was es mit Münzen kosten würde</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+.
     <div id="view_about" class="app-view">
         <div class="section">
             <div class="section-title" data-i18n="app_about">Über das Tool</div>
@@ -903,10 +956,6 @@
                 </p>
             </div>
         </div>
-    </div>
-
-    <div class="disclaimer-box" data-i18n="disclaimer" style="margin-top: 20px;">
-        Alle Angaben sind ohne Gewähr. Die Werte der Tabelle sind nicht zu 100% korrekt (Mehr infos in (über))
     </div>
 </div>
 
@@ -967,7 +1016,10 @@
             attack_p1: "Angriff Spieler",
             table_title_nomad_advisitor: "Kombi Angebote Nomaden",
             table_title_samu_advisitor: "Kombi Angebote Samurai",
+            app_links: "Hilfreiche Links",
+            app_Hilfe: "Hilfe",
             disclaimer: "Alle Angaben sind ohne Gewähr.",
+
             
             // Liga Rechner Spezifisch
             liga_inputs_title: "Liga Eingabewerte",
@@ -1085,6 +1137,8 @@
             attack_p1: "Attack Player",
             table_title_nomad_advisitor: "Nomad Combo Offers",
             table_title_samu_advisitor: "Samurai Combo Offers",
+            app_links: "Helpful Links",
+            app_hilfe: "Help",
             disclaimer: "All information is without guarantee.",
             
             // Liga Rechner Spezifisch

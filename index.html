@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="title">Kahnrechner, Liga & Berimond</title>
+    <title data-i18n="title">Tipps/ Rechner und Co.</title>
     <link rel="icon" type="image/png" href="icon.png">
     
     <style>
@@ -172,12 +172,18 @@
         }
         /* Farben aus dem Screenshot */
         .bg-orange-cell { background-color: #fbd4b4; }
+        .bg-lightpurple { background-color: #d000fa; }
+        .bg-darkblue { background-color: #1100ff; }
+        .bg-red-cell { background-color: #ff0000; }
+        .bg-lightorange { background-color: #ff7b00; }
         .bg-blue-cell { background-color: #b8cce4; }
         .bg-green-cell { background-color: #c4d79b; }
         .bg-purple-cell { background-color: #ccc0da; }
         .bg-pink-cell { background-color: #d99694; }
         .bg-darkgrey { background-color: #595959; height: 15px; }
         .bg-lightgrey { background-color: #e6e6e6; }
+        .bg-lightgreen { background-color: #15ff00; }
+        .bg.bblue { background-color: #009dff; }
 
         /* Scrollbare Titel-Tabelle */
         .scrollable-table {
@@ -262,6 +268,15 @@
             border-radius: 4px;
             color: #2c3e50;
         }
+
+        /* Mark */
+
+            mark {
+                background-color: #00ff08;
+                color: #2c3e50;
+                padding: 0 4px;
+                border-radius: 4px;
+            }
     </style>
 </head>
 <body>
@@ -277,9 +292,12 @@
                     <option value="liga" data-i18n="app_liga">Liga Rechner</option>
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
                     <option value="berater" data-i18n="app_berater">Berater Rechner</option>
-                    <option value="changelog" data-i18n="app_changelog">Changelog</option>
+                    <option value="generale_1" data-i18n="app_generale_1">Generäle Offensiv</option>
+                    <option value="generale_2" data-i18n="app_generale_2">Generäle Defensiv</option>
                     <option value="links"   data-i18n="app_links">Links</option>
                     <option value="Hilfe"   data-i18n="app_links">Hilfe</option>
+                    <option value="changelog" data-i18n="app_changelog">Changelog</option>
+                    <option value="Berechnungen" data-i18n="app_berechnungen">Dokumentation</option>
                 </select>
             </div>
 
@@ -596,6 +614,567 @@
         </div>
     </div>
 
+<div id="view_generale_1" class="app-view">
+    <div class="section data-table-container">
+        <div class="section-title" data-i18n="generale_talent_off">Generäle - Talent Offensiv</div>
+        <table class="data-table">
+            <thead>
+                
+                <a><strong>Die Verschiedenen Versionen sind reine Vorschläge die ich meiner Meinung nach am besten sind.</strong></a>
+        
+                <tr>
+                    <th colspan="6" class="bg-red-cell" style="font-size: 1.2em; border-right: 3px solid #000000;">Offensiv / Angriff</th>
+                   </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Toril</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Aspekt des Drachen</td><td>Aspekt des Drachen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Kurzer Prozess</td><td>Erhaben</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Drachenschuppenrüstung</td><td>Drachenschuppenrüstung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Flügelschlag</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Kaelrith</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Aspekt des Drachen</td><td>Erhaben</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Herz eines Kriegers</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Drachenschuppenrüstung</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Sasaki</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Endlose Übung</td><td>Endlose Übung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Der Weg des Schwertes</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Bleibende Wunden</td><td>Bleibende Wunden</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Der Weg zur Perfektion</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Horatio</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Gewaltiger Schild</td><td>Gewaltiger Schild</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Mit der Aufgabe wachsen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Herz eines Kriegers</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                 <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Diana</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Bleibende Wunden</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Mit der Aufgabe wachsen</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Herz eines Kriegers</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Tizi</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verpfuschtes Werkzeug</td><td>Verpfuschtes Werkzeug</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Mit der Aufgabe wachsen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Erhaben</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr> 
+                
+                
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Ashira</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verstärkte Pfeile</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Langbogen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Mit der Aufgabe wachsen</td><td>Mit der Aufgabe wachsen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Barin</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Hinterhakt</td><td>Verborgene Schätze</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Leo</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verstärkte Pfeile</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Langbogen</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Verpfuschtes Werkzeug</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Alyssa</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Schlachtfeldbeute</td><td>Schlachtfeldbeute</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Vergeltung</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Hassan</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Machtwoge</td><td>Verpfuschtes Werkzeug</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Endlose Übung</td><td>Endlose Übung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Valenta</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Mit Aufgabe Wachsen</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hordenbezwinger</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="view_generale_2" class="app-view">
+    <div class="section data-table-container">
+        <div class="section-title" data-i18n="generale_talent_deff">Generäle - Talent Defensive</div>
+        <table class="data-table">
+            <thead>
+                
+                <a><strong>Die Verschiedenen Versionen sind reine Vorschläge die ich meiner Meinung nach am besten sind.</strong></a>
+                <tr>
+                    <th colspan="6" class="bg-blue-cell" style="font-size: 1.2em; border-right: 3px solid #000000;">Defensiv / Verteidigung</th>
+                   </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Toril</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Aspekt des Drachen</td><td>Aspekt des Drachen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Kurzer Prozess</td><td>Erhaben</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Drachenschuppenrüstung</td><td>Drachenschuppenrüstung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Flügelschlag</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Kaelrith</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Aspekt des Drachen</td><td>Erhaben</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Herz eines Kriegers</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Drachenschuppenrüstung</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightorange"><strong>Legendär</strong></td>
+                    <td rowspan="5" class="bg-lightorange"><strong>Sasaki</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Endlose Übung</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Der Weg des Schwertes</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Bleibende Wunden</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Der Weg zur Perfektion</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Horatio</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Gewaltiger Schild</td><td>Gewaltiger Schild</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Herz eines Kriegers</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Mauermenge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                 <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Diana</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Bleibende Wunden</td><td>Der Weg des Schwertes</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Hinterhalt</td><td>Hinterhalt</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Herz eines Kriegers</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Tizi</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verpfuschtes Werkzeug</td><td>Verpfuschtes Werkzeug</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Erhaben</td><td>Herz eines Kriegers</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr> 
+                
+                
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Ashira</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verstärkte Pfeile</td><td>Vergeltung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Langbogen</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hinterhalt</td><td>Hinterhalt</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Episch</strong></td>
+                    <td rowspan="5" class="bg-lightpurple"><strong>Barin</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Hinterhakt</td><td></td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 4</td><td>Riesentöter</td><td>Riesentöter</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Leo</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Verstärkte Pfeile</td><td>Verstärkte Pfeile</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Langbogen</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Verpfuschtes Werkzeug</td><td>Hinterhalt</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Alyssa</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Schlachtfeldbeute</td><td>Schlachtfeldbeute</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Vergeltung</td><td>Machtwoge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Hassan</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Machtwoge</td><td>Verpfuschtes Werkzeug</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Endlose Übung</td><td>Endlose Übung</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Der Weg des Schwerts</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+                <tr><td colspan="12" class="bg-darkgrey"></td></tr>
+
+                <tr>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Selten</strong></td>
+                    <td rowspan="4" class="bg-lightgreen"><strong>Valenta</strong></td>
+                    <td class="bg-lightgrey"><strong>Talente</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 1</strong></td>
+                    <td class="bg-lightgrey"><strong>Version 2</strong></td>
+                    <td class="bg-lightgrey" style="border-right: 3px solid #000;"><strong>Version 3</strong></td>
+                </tr>
+                <tr>
+                    <td>Reihe 1</td><td>Gewaliger Schild</td><td>Gewaliger Schild</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 2</td><td>Machtwoge</td><td>Mauermenge</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+                <tr>
+                    <td>Reihe 3</td><td>Hordenbezwinger</td><td>Hordenbezwinger</td><td style="border-right: 3px solid #000;"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
     <div id="view_berimond" class="app-view">
         <div class="grid">
             <div class="section" style="margin-bottom: 0;">
@@ -648,7 +1227,7 @@
                 <div class="section-title" data-i18n="beri_title_x">Ergebnis x. Spieler (Eingabewerte)</div>
                 <table class="calc-table">
                     <tr>
-                        <td data-i18n="beri_players">Anzahl Spieler</td>
+                        <td data-i18n="beri_players">Anzahl Spieler (X)</td>
                         <td><input type="number" id="bx_spieler" value="5" min="1" class="beri-field"></td>
                     </tr>
                     <tr>
@@ -673,7 +1252,7 @@
                     </tr>
                 </table>
 
-                <h3 style="margin-top: 20px; font-size: 1.1em; border-bottom: 1px solid #ddd; padding-bottom: 5px;" data-i18n="beri_res_x">Ergebnisse Mehrere Spieler</h3>
+                <h3 style="margin-top: 20px; font-size: 1.1em; border-bottom: 1px solid #ddd; padding-bottom: 5px;" data-i18n="beri_res_x">Ergebnisse .X. Spieler</h3>
                 <table class="calc-table">
                     <tr>
                         <td data-i18n="beri_chain_time">Ketten Zeit</td>
@@ -713,9 +1292,10 @@
                 </thead>
                 <tbody>
                     <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-lightgrey">-</td><td class="bg-green-cell">450</td><td class="bg-purple-cell">2.500</td><td class="bg-pink-cell">250</td></tr>
-                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">300%</td><td class="bg-lightgrey">240min</td><td class="bg-green-cell">-</td><td class="bg-purple-cell">9.000</td><td class="bg-pink-cell">-</td></tr>
-                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">400%</td><td class="bg-lightgrey">360min</td></td></td><td class="bg-green-cell">2.200</td><td class="bg-purple-cell">11.000</td><td class="bg-pink-cell">900</td></tr>
-                
+                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">300%</td><td class="bg-lightgrey">240min</td><td class="bg-green-cell">1.800</td><td class="bg-purple-cell">9.000</td><td class="bg-pink-cell">1.000</td></tr>
+                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">400%</td><td class="bg-lightgrey">360min</td></td></td><td class="bg-green-cell">2.200</td><td class="bg-purple-cell">11.000</td><td class="bg-pink-cell">1.250</td></tr>
+                    <tr><td class="bg-lightgrey">100€</td><td class="bg-lightgrey">700%</td><td class="bg-lightgrey">480min</td></td></td><td class="bg-green-cell">3.600</td><td class="bg-purple-cell">20.000</td><td class="bg-pink-cell">2.000</td></tr>
+
                 </tbody>
             </table>
         </div>
@@ -782,7 +1362,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">1100%</td><td class="bg-lightgrey">60min</td><td class="bg-green-cell">1.450</td><td class="bg-purple-cell">1.100</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-lightgrey">-</td><td class="bg-green-cell">100</td><td class="bg-purple-cell">145</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">5€</td><td class="bg-lightgrey">1100%</td><td class="bg-lightgrey">60min</td><td class="bg-green-cell">1.100</td><td class="bg-purple-cell">1.450</td><td class="bg-pink-cell"></td></tr>
                     <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">1200%</td><td class="bg-lightgrey">120min</td><td class="bg-green-cell">1.200</td><td class="bg-purple-cell">1.600</td><td class="bg-pink-cell"></td></tr>
                     <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">1400%</td><td class="bg-lightgrey">240min</td></td><td class="bg-green-cell">1.400</td><td class="bg-purple-cell">1.950</td><td class="bg-pink-cell"></td></tr>
                 
@@ -809,8 +1390,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">1000%</td><td class="bg-lightgrey">60min</td><td class="bg-green-cell">1.200</td><td class="bg-purple-cell">1.300</td><td class="bg-pink-cell"></td></tr>
-                    <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">1300%</td><td class="bg-lightgrey">180min</td></td><td class="bg-green-cell">1.350</td><td class="bg-purple-cell">1.800</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">0€</td><td class="bg-lightgrey">-</td><td class="bg-lightgrey">undendlich</td><td class="bg-green-cell">100</td><td class="bg-purple-cell">145</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">1000%</td><td class="bg-lightgrey">60min</td><td class="bg-green-cell">1.000</td><td class="bg-purple-cell">1.450</td><td class="bg-pink-cell"></td></tr>
+                    <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">1300%</td><td class="bg-lightgrey">180min</td></td><td class="bg-green-cell">1.300</td><td class="bg-purple-cell">1.850</td><td class="bg-pink-cell"></td></tr>
                 
                 </tbody>
             </table>
@@ -824,7 +1406,14 @@
             <div class="section-title" data-i18n="app_changelog">Changelog</div>
             
             <div class="changelog-entry">
-                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.5 - Aktuell</div>
+                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.6 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_4_desc">
+                    <li>Generäle hinzugefügt mit Deffensiven und Offensiven Talent Vorschlägen</li>
+                </ul>
+            </div>
+
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.5</div>
                 <ul class="changelog-list" data-i18n="cl_v1_4_desc">
                     <li>Eine Seite für Hilfreiche Links erstellt</li>
                 </ul>
@@ -914,7 +1503,7 @@
             </div>
         </div>
     </div>
-.
+
     <div id="view_Hilfe" class="app-view">
         <div class="section">
             <div class="section-title" data-i18n="app_Hilfe">Hilfe</div>
@@ -928,9 +1517,39 @@
                         <li>Bei "Werkzeugkosten (in Münzen)" kann man sich ausrechnen lassen, wenn man kein Eventwerkzeug verwenden möchte was es mit Münzen kosten würde</li>
                 </ul>
             </div>
+
+             <div class="changelog-entry">
+                <div class="hilfe-date" data-i18n="Empire Rankings"><strong>Berater Rechner</strong></div>
+                <ul class="hilfe-list" data-i18n="cl_v1_3_desc">
+                    <strong>Wie bediene ich den Rechner?</strong>
+                        <li>Laufzeit Booster (Laufzeit des Pakets oder gewünschte Laufzeit)</li>
+                        <li>Die Punkte pro Angriff müssen aus der Tabelle entnommen werden</li>
+                        <li>Laufzeit: Zeit von Burg zum Lager</li>
+                        <li>Rückkehrzeit: Zeit von Lager zurück zur Burg</li>
+                </ul>
+            </div>
+
         </div>
     </div>
-.
+
+     <div id="view_Berechnungen" class="app-view">
+        <div class="section">
+            <div class="section-title" data-i18n="app_Berechnungen">Berechnungen</div>
+            
+            <div class="changelog-entry">
+                <div class="hilfe-date" data-i18n="Empire Rankings"><strong>Berechnungsdokumentation</strong></div>
+                <ul class="hilfe-list" data-i18n="cl_v1_3_desc">
+                   
+                       <strong> In Arbeit / Work in Progress</strong>
+                        
+                </ul>
+            </div>
+
+        
+
+        </div>
+    </div>
+
     <div id="view_about" class="app-view">
         <div class="section">
             <div class="section-title" data-i18n="app_about">Über das Tool</div>
@@ -970,7 +1589,10 @@
             app_berater: "Berater Rechner",
             app_changelog: "Changelog",
             app_about: "Über das Tool",
+            app_generale_1: "Generäle Offensiv",
+            app_generale_2: "Generäle Defensiv",
             btn_about: "Über",
+            app_berechnung: "Dokumentation",
             inputs: "Eingabewerte",
             duration: "Dauer (in Stunden)",
             medals: "Gewonnene Kahnmedaillen",
@@ -1019,6 +1641,10 @@
             app_links: "Hilfreiche Links",
             app_Hilfe: "Hilfe",
             disclaimer: "Alle Angaben sind ohne Gewähr.",
+            generale_talent_off: "Generäle - Talent Offensiv",
+            generale_1: "Generäle Offensiv",
+            generale_talent_deff: "Generäle - Talent Defensiv",
+            generale_2: "Generäle Defensiv",
 
             
             // Liga Rechner Spezifisch
@@ -1090,7 +1716,10 @@
             app_liga: "League Calculator",
             app_berimond: "Berimond Calculator",
             app_berater: "advisitor Calculator",
+            app_generale_1: "Generals Offensive",
+            app_generale_2: "Generals Defensive",
             app_changelog: "Changelog",
+            app_berechnung: "documentation",
             app_about: "About the Tool",
             btn_about: "About",
             inputs: "Input Values",
@@ -1140,6 +1769,10 @@
             app_links: "Helpful Links",
             app_hilfe: "Help",
             disclaimer: "All information is without guarantee.",
+            generale_talent_off: "Generals - Talent Offensive",
+            generale_1: "Generals Offensive",
+            generale_talent_deff: "Generals - Talent Defensive",
+            generale_2: "Generals Defensive",
             
             // Liga Rechner Spezifisch
             liga_inputs_title: "League Inputs",

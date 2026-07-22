@@ -1924,10 +1924,14 @@
         let verlusteProVert = parseFloat(document.getElementById('verluste').value) || 0;
         let seiten = parseFloat(document.getElementById('seiten').value) || 0;
 
-        let punkte = medaillen * 7 * kettenlaenge * dauer * 9.02;
+        let punkte = medaillen * 7 * kettenlaenge * dauer * 9.02 ;
         let verteidigungen = medaillen > 0 ? Math.round(punkte / (medaillen * 7)) : 0;
         let medaillenGesamt = medaillen * verteidigungen;
         let tafelnGesamt = verteidigungen * tafelnProVert;
+        
+        // NEU: Addiere die Gesamt-Kahntafeln 1 zu 1 auf den Punkte Endstand
+        punkte = punkte + tafelnGesamt;
+
         let verlustGesamt = verteidigungen * verlusteProVert;
 
         let mauerWerkzeuge = Math.round(seiten * 48.8 * verteidigungen);

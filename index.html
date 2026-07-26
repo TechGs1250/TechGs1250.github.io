@@ -289,6 +289,7 @@
             <div class="header-switcher">
                 <select id="appSelect">
                     <option value="kahn" data-i18n="app_kahn">Kahnrechner</option>
+                    <option value="kahn_compare" data-i18n="app_kahn_compare">Kahn Vergleich</option>
                     <option value="liga" data-i18n="app_liga">Liga Rechner</option>
                     <option value="berimond" data-i18n="app_berimond">Berimond Rechner</option>
                     <option value="berater" data-i18n="app_berater">Berater Rechner</option>
@@ -435,8 +436,82 @@
                 </tr>
             </table>
         </div>
+    </div>
+    
+    <div id="view_kahn_compare" class="app-view">
+        <div class="grid">
+            
+            <!-- ================= KAHNRECHNER 1 ================= -->
+            <div class="left-column" style="display: flex; flex-direction: column; gap: 25px;">
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="inputs">Eingabewerte (Rechner 1)</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="duration">Dauer (in h)</td><td><input type="number" id="dauer_1" value="1.0" step="0.1" min="0"></td></tr>
+                        <tr><td data-i18n="medals">Gewonnene Kahnmedaillen</td><td><input type="number" id="medaillen_1" value="35000" min="0"></td></tr>
+                        <tr><td data-i18n="chain">Kettenlänge</td><td><input type="number" id="kettenlaenge_1" value="45" min="0"></td></tr>
+                        <tr><td data-i18n="tablets">Tafeln pro Verteidigung</td><td><input type="number" id="tafeln_1" value="2500" min="0"></td></tr>
+                        <tr><td data-i18n="losses_input">Verluste</td><td><input type="number" id="verluste_1" value="150" min="0"></td></tr>
+                        <tr><td data-i18n="sides">Anzahl der vert. Seiten</td><td><input type="number" id="seiten_1" value="2" min="0"></td></tr>
+                    </table>
+                </div>
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="results">Ergebnisse 1</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="points">Punkte Endstand</td><td class="output green"><span id="res_punkte_1">0</span></td></tr>
+                        <tr><td data-i18n="defenses">Anzahl der Verteidigungen</td><td class="output blue"><span id="res_vert_1">0</span></td></tr>
+                        <tr><td data-i18n="coins">Gewonnene Münzen</td><td class="output green"><span id="res_muenzen_gew_1">0</span></td></tr>
+                        <tr><td data-i18n="total_medals">Gesamt Kahnmedaillen</td><td class="output orange"><span id="res_medaillen_ges_1">0</span></td></tr>
+                        <tr><td data-i18n="total_tablets">Gesamt Kahntafeln</td><td class="output yellow"><span id="res_tafeln_ges_1">0</span></td></tr>
+                    </table>
+                </div>
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="tool_usage">Werkzeug Verbrauch und Verluste 1</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="total_losses">Gesamtverluste</td><td class="output"><span id="res_verlust_ges_1">0</span></td></tr>
+                        <tr><td data-i18n="wall_tools">Mauer-Werkzeuge</td><td class="output black"><span id="res_mauer_1">0</span></td></tr>
+                        <tr><td data-i18n="moat_tools">Graben-Werkzeuge</td><td class="output black"><span id="res_graben_1">0</span></td></tr>
+                        <tr><td data-i18n="gate_tools">Tor-Werkzeuge</td><td class="output black"><span id="res_tor_1">0</span></td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div class="section data-table-container">
+            <!-- ================= KAHNRECHNER 2 ================= -->
+            <div class="right-column" style="display: flex; flex-direction: column; gap: 25px;">
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="inputs">Eingabewerte (Rechner 2)</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="duration">Dauer (in h)</td><td><input type="number" id="dauer_2" value="1.0" step="0.1" min="0"></td></tr>
+                        <tr><td data-i18n="medals">Gewonnene Kahnmedaillen</td><td><input type="number" id="medaillen_2" value="35000" min="0"></td></tr>
+                        <tr><td data-i18n="chain">Kettenlänge</td><td><input type="number" id="kettenlaenge_2" value="45" min="0"></td></tr>
+                        <tr><td data-i18n="tablets">Tafeln pro Verteidigung</td><td><input type="number" id="tafeln_2" value="2500" min="0"></td></tr>
+                        <tr><td data-i18n="losses_input">Verluste</td><td><input type="number" id="verluste_2" value="150" min="0"></td></tr>
+                        <tr><td data-i18n="sides">Anzahl der vert. Seiten</td><td><input type="number" id="seiten_2" value="2" min="0"></td></tr>
+                    </table>
+                </div>
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="results">Ergebnisse 2</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="points">Punkte Endstand</td><td class="output green"><span id="res_punkte_2">0</span></td></tr>
+                        <tr><td data-i18n="defenses">Anzahl der Verteidigungen</td><td class="output blue"><span id="res_vert_2">0</span></td></tr>
+                        <tr><td data-i18n="coins">Gewonnene Münzen</td><td class="output green"><span id="res_muenzen_gew_2">0</span></td></tr>
+                        <tr><td data-i18n="total_medals">Gesamt Kahnmedaillen</td><td class="output orange"><span id="res_medaillen_ges_2">0</span></td></tr>
+                        <tr><td data-i18n="total_tablets">Gesamt Kahntafeln</td><td class="output yellow"><span id="res_tafeln_ges_2">0</span></td></tr>
+                    </table>
+                </div>
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="section-title" data-i18n="tool_usage">Werkzeug Verbrauch und Verluste 2</div>
+                    <table class="calc-table">
+                        <tr><td data-i18n="total_losses">Gesamtverluste</td><td class="output"><span id="res_verlust_ges_2">0</span></td></tr>
+                        <tr><td data-i18n="wall_tools">Mauer-Werkzeuge</td><td class="output black"><span id="res_mauer_2">0</span></td></tr>
+                        <tr><td data-i18n="moat_tools">Graben-Werkzeuge</td><td class="output black"><span id="res_graben_2">0</span></td></tr>
+                        <tr><td data-i18n="gate_tools">Tor-Werkzeuge</td><td class="output black"><span id="res_tor_2">0</span></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section data-table-container">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -461,7 +536,7 @@
                     <tr><td class="bg-lightgrey">10€</td><td class="bg-lightgrey">600%</td><td class="bg-lightgrey">2h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell">25.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">35.000</td><td class="bg-pink-cell"></td></tr>
                     <tr><td class="bg-lightgrey">20€</td><td class="bg-lightgrey">800%</td><td class="bg-lightgrey">3h</td><td class="bg-orange-cell">27.500</td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell">45.000</td><td class="bg-pink-cell"></td></tr>
                     <tr><td class="bg-lightgrey">30€</td><td class="bg-lightgrey">1000%</td><td class="bg-lightgrey">4h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell">46.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">55.000</td><td class="bg-pink-cell">75.000</td></tr>
-                    <tr><td class="bg-lightgrey">50€</td><td class="bg-lightgrey">1400%</td><td class="bg-lightgrey">5h</td><td class="bg-orange-cell">48.000</td><td class="bg-blue-cell">51.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">70.000</td><td class="bg-pink-cell">102.000</td></tr>
+                    <tr><td class="bg-lightgrey">50€</td><td class="bg-lightgrey">1400%</td><td class="bg-lightgrey">5h</td><td class="bg-orange-cell">42.000</td><td class="bg-blue-cell">51.000</td><td class="bg-green-cell"></td><td class="bg-purple-cell">70.000</td><td class="bg-pink-cell">102.000</td></tr>
                     <tr><td class="bg-lightgrey">100€</td><td class="bg-lightgrey">1700%</td><td class="bg-lightgrey">6h</td><td class="bg-orange-cell"></td><td class="bg-blue-cell"></td><td class="bg-green-cell"></td><td class="bg-purple-cell"></td><td class="bg-pink-cell"></td></tr>
                     
                     <tr><td colspan="8" class="bg-darkgrey"></td></tr>
@@ -520,7 +595,7 @@
             </table>
         </div>
     </div>
-    
+
     <div id="view_liga" class="app-view">
         <div class="grid">
             <div class="section">
@@ -1406,7 +1481,14 @@
             <div class="section-title" data-i18n="app_changelog">Changelog</div>
 
             <div class="changelog-entry">
-                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.7 - Aktuell</div>
+                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.8 - Aktuell</div>
+                <ul class="changelog-list" data-i18n="cl_v1_4_desc">
+                    <li>Kahnvergleich hinzugefügt; damit man entscheiden kann, welches Paket/ Stufe am besten passt</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-entry">
+                <div class="changelog-date" data-i18n="cl_v1_4_date">Version 1.7</div>
                 <ul class="changelog-list" data-i18n="cl_v1_4_desc">
                     <li>Kahnrechner verbessert: (Rechnet nun die Kahntafeln mit ein in die Gesammtpunkte)</li>
                 </ul>
@@ -1608,6 +1690,7 @@
         de: {
             title: "Kahnrechner, Liga & Berimond",
             app_kahn: "Kahnrechner",
+            app_kahn_compare: "Kahn Vergleich",
             app_liga: "Liga Rechner",
             app_berimond: "Berimond Rechner",
             app_berater: "Berater Rechner",
@@ -1737,6 +1820,7 @@
         en: {
             title: "Khan, League & Berimond Calculator",
             app_kahn: "Khan Calculator",
+            app_kahn_compare: "Khan Comparison",
             app_liga: "League Calculator",
             app_berimond: "Berimond Calculator",
             app_berater: "advisitor Calculator",
@@ -1971,6 +2055,53 @@
     }
 
     // ----------------------------------------------------
+    // KAHNRECHNER VERGLEICH LOGIK
+    // ----------------------------------------------------
+    function calculateKahnSide(suffix) {
+        let dauer = parseFloat(document.getElementById('dauer' + suffix).value) || 0;
+        let medaillen = parseFloat(document.getElementById('medaillen' + suffix).value) || 0;
+        let kettenlaenge = parseFloat(document.getElementById('kettenlaenge' + suffix).value) || 0;
+        let tafelnProVert = parseFloat(document.getElementById('tafeln' + suffix).value) || 0;
+        let verlusteProVert = parseFloat(document.getElementById('verluste' + suffix).value) || 0;
+        let seiten = parseFloat(document.getElementById('seiten' + suffix).value) || 0;
+
+        let punkte = medaillen * 7 * kettenlaenge * dauer * 9.02 ;
+        let verteidigungen = medaillen > 0 ? Math.round(punkte / (medaillen * 7)) : 0;
+        let medaillenGesamt = medaillen * verteidigungen;
+        let tafelnGesamt = verteidigungen * tafelnProVert;
+        
+        punkte = punkte + tafelnGesamt;
+
+        // Verluste berechnen
+        let verlustGesamt = verteidigungen * verlusteProVert;
+
+        // Werkzeuge berechnen
+        let mauerWerkzeuge = Math.round(seiten * 48.8 * verteidigungen);
+        let grabenWerkzeuge = Math.round(seiten * 11.2 * verteidigungen);
+        let torWerkzeuge = Math.round(22.6 * verteidigungen);
+
+        let muenzenGewonnen = verteidigungen * 30000;
+
+        // Werte im HTML (DOM) aktualisieren
+        document.getElementById('res_punkte' + suffix).innerText = punkte.toLocaleString(currentLocale, { maximumFractionDigits: 0 });
+        document.getElementById('res_vert' + suffix).innerText = verteidigungen.toLocaleString(currentLocale);
+        document.getElementById('res_muenzen_gew' + suffix).innerText = muenzenGewonnen.toLocaleString(currentLocale);
+        document.getElementById('res_medaillen_ges' + suffix).innerText = medaillenGesamt.toLocaleString(currentLocale);
+        document.getElementById('res_tafeln_ges' + suffix).innerText = tafelnGesamt.toLocaleString(currentLocale);
+        
+        // Verbrauch & Verluste im HTML (DOM) aktualisieren
+        document.getElementById('res_verlust_ges' + suffix).innerText = verlustGesamt.toLocaleString(currentLocale);
+        document.getElementById('res_mauer' + suffix).innerText = mauerWerkzeuge.toLocaleString(currentLocale);
+        document.getElementById('res_graben' + suffix).innerText = grabenWerkzeuge.toLocaleString(currentLocale);
+        document.getElementById('res_tor' + suffix).innerText = torWerkzeuge.toLocaleString(currentLocale);
+    }
+
+    function refreshKahnCompare() {
+        calculateKahnSide('_1');
+        calculateKahnSide('_2');
+    }
+
+    // ----------------------------------------------------
     // LIGA RECHNER LOGIK
     // ----------------------------------------------------
     function buildLigaTables() {
@@ -2085,12 +2216,14 @@
     document.querySelectorAll('#view_kahn input, #view_kahn select').forEach(el => el.addEventListener('input', refreshKahn));
     document.querySelectorAll('.liga-field').forEach(el => el.addEventListener('input', refreshLiga));
     document.querySelectorAll('.beri-field').forEach(el => el.addEventListener('input', refreshBerimond));
+    document.querySelectorAll('#view_kahn_compare input').forEach(el => el.addEventListener('input', refreshKahnCompare));
 
     // Initialisierung
     buildLigaTables();
     refreshKahn();
     refreshLiga();
     refreshBerimond();
+    refreshKahnCompare();
 
     // --- Berater Rechner Logic ---
     function refreshBerater() {

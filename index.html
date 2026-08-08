@@ -1724,10 +1724,13 @@
 
         // Cooldown Logik:
         let cooldown_min = 90; // Standard
+        
+        if (aboActive) {
+            cooldown_min -= 30; // Zieht 30 Minuten für das Abo ab
+        }
+        
         if (allianzActive) {
-            cooldown_min = 30; // Allianz Bonus
-        } else if (aboActive) {
-            cooldown_min = 60; // Abo Bonus
+            cooldown_min -= 30; // Zieht 30 Minuten für den Allianz Bonus ab
         }
 
         // Gesamtminuten an Cooldown, die für alle Angriffe übersprungen werden müssen

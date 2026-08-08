@@ -864,6 +864,10 @@
                             <td class="output green"><span id="berater_res_punkte">0</span></td>
                         </tr>
                         <tr>
+                            <td>Gewonnene Münzen</td>
+                            <td class="output yellow"><span id="berater_res_muenzen">0</span></td>
+                        </tr>
+                        <tr>
                             <td colspan="2" style="padding-top: 15px; border-bottom: 2px solid #ccc;">
                                 <strong>Benötigte Beschleuniger (Einzeln)</strong>
                             </td>
@@ -1708,14 +1712,20 @@
 
         let angriffe_ges = Math.round(x * anzahl_fhs);
         let punkte_ges = angriffe_ges * punkte_pa;
+        
+        // NEUE BERECHNUNG HIER EINFÜGEN:
+        let muenzen_ges = angriffe_ges * 57105;
 
         document.getElementById('berater_res_angriffe').innerText = angriffe_ges.toLocaleString(currentLocale);
         document.getElementById('berater_res_punkte').innerText = Math.round(punkte_ges).toLocaleString(currentLocale);
+        
+        // NEUE AUSGABE HIER EINFÜGEN:
+        document.getElementById('berater_res_muenzen').innerText = Math.round(muenzen_ges).toLocaleString(currentLocale);
 
         // Cooldown Logik:
         let cooldown_min = 90; // Standard
         if (allianzActive) {
-            cooldown_min = 30; // Allianz Bonus überschreibt alles
+            cooldown_min = 30; // Allianz Bonus
         } else if (aboActive) {
             cooldown_min = 60; // Abo Bonus
         }
